@@ -184,3 +184,81 @@ Based on your detailed preferences, here is a list of potential interview questi
 * How would you analyze trends in threat data to improve your security posture?
 * Describe your approach to reducing false positives while maintaining detection efficacy.
 * How do you measure and improve mean time to detection (MTTD) and mean time to response (MTTR)?
+
+
+---
+
+### 🔧 1. Installation, Deployment, and Configuration
+* What are the steps to deploy the Falcon sensor on Windows/Linux/Mac?
+* How do you verify the sensor is properly installed and communicating with the cloud?
+* What are the different installation switches (like `--maintenance-token`) and their uses?
+* How can I create and assign different CID groups?
+* What happens when a host is reinstalled or cloned — how does Falcon handle duplicate host records?
+
+---
+
+### 🔍 2. Detection and Response
+* How does CrowdStrike detect and respond to threats?
+* What is the difference between **Prevention**, **Detection**, and **Response** in Falcon?
+* What happens when a detection is triggered? How can it be investigated?
+* How are **indicators of attack (IOAs)** used vs **indicators of compromise (IOCs)**?
+* What is the remediation process once a threat is detected?
+
+---
+
+### 📊 3. Falcon UI and Modules
+* What is the purpose of each Falcon module: **Falcon Insight**, **Falcon Prevent**, **Falcon Overwatch**, **Falcon Discover**?
+* What kind of data is available in **Host**, **Activity**, **Detection**, and **Incident** views?
+* How do you create and apply **Prevention Policies** or **Exclusions**?
+* What is the role of **Sensor Visibility Exclusions**, and how do you configure them?
+
+---
+
+### 📜 4. Real-Time Response (RTR)
+* What is **RTR** and how do you initiate it?
+* What are the commonly used **RTR** commands for investigation?
+* Can you pull logs or kill processes remotely? How?
+* How is **RTR** different from remote shell?
+
+---
+
+### 🕵️ 5. Threat Hunting and Query Language
+* What is CrowdStrike's version of Splunk or SIEM-like query language? (Answer: **Falcon Detection Search** or **LogScale** if used)
+* How do I query for processes spawning PowerShell, WMI, or LOLBins?
+* Examples:
+    * Search for PowerShell execution with base64 encoded commands.
+    * Detect lateral movement using RDP or SMB.
+    * Find parent-child process anomalies (e.g., MS Word spawning PowerShell).
+* What is **Falcon Fusion** and how is it used for automation?
+
+---
+
+### 🔐 6. API and Integration
+* How do you use Falcon API to pull detections/events?
+* What are common integrations: SIEM (**Splunk/QRadar**), SOAR, ServiceNow?
+* How do you generate an API client, and what permissions/scopes are needed?
+* Can you write a Python script using **FalconPy** to pull host data or detections?
+
+---
+
+### 🧠 7. Advanced Topics & Scenario-Based
+* How would you handle a host that is isolated due to a false positive?
+* How do you investigate a host communicating with a known **C2 domain**?
+* What are steps to handle **ransomware** detected by Falcon?
+* How do you tune detections to reduce false positives?
+
+---
+
+### 💡 8. CrowdStrike Ecosystem & Competitors
+* How does CrowdStrike compare to **SentinelOne**, **Microsoft Defender**, or **Carbon Black**?
+* What are **Falcon Complete** and **OverWatch**, and how are they different?
+* What does **NGAV** mean, and how does Falcon differ from traditional antivirus?
+
+---
+
+### 📌 Bonus: Behavioral or Operational Questions
+* Tell me about a time you used Falcon to detect a real-world threat.
+* How do you manage policy rollouts across large environments?
+* How do you ensure sensor coverage and hygiene?
+
+Would you like a cheat sheet or flashcard format for any of these? Or maybe I can help you simulate a mock interview based on these topics.
