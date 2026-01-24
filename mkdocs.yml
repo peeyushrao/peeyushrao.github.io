@@ -1,15 +1,17 @@
-site_name: Peeyush Rao – Technical Notes
+site_name: Peeyush Rao – Security Interview Notes
+
 theme:
   name: material
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.expand
+    - navigation.indexes
+    - content.code.copy
 
-nav:
-  - Home: index.md
-  - EDR:
-      - What is EDR?: edr/what-is-edr.md
-      - DLL Sideloading: edr/dll-sideloading.md
-  - Zscaler:
-      - Zscaler Architecture: zscaler/zscaler-architecture.md
-  - Linux:
-      - Linux Basics: linux/linux-basics.md
-  - Windows:
-      - Windows Internals: windows/windows-internals.md
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
