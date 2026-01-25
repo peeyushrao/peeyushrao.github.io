@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Peeyush Rao – Interview Notes</title>
+
+  <!-- Docsify theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
 </head>
 <body>
@@ -11,11 +13,22 @@
   <script>
     window.$docsify = {
       name: 'Peeyush Rao – Security Interview Notes',
+
+      // Enable sidebar
       loadSidebar: true,
-      sidebarDisplayLevel: 1
+
+      // Collapsible sections (only level-1 visible initially)
+      sidebarDisplayLevel: 1,
+
+      // Smooth navigation
+      auto2top: true
     }
   </script>
 
+  <!-- Docsify core -->
   <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+
+  <!-- Sidebar collapse plugin (optional but recommended) -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
 </body>
 </html>
