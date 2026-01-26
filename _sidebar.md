@@ -1,7 +1,7 @@
 - **Interview Q&A**
   - [Primary mission of a Security Operations Center(SOC)](Interview-QA/1.md)
-  - [Difference between an alert, a detection, and an incident?](Interview-QA/2.md)
-
+  - [Difference between an alert, a detection, and an incident](Interview-QA/2.md)
+  - [Why context is more important than Severity](Interview-QA/3.md)
 - **CrowdStrike**
   - 
 
