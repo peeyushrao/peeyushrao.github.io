@@ -6,6 +6,27 @@
 
   <!-- Docsify theme -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+
+  <!-- Sidebar width + readability polish -->
+  <style>
+    /* Increase sidebar width */
+    .sidebar {
+      width: 360px;
+    }
+
+    /* Push main content to the right */
+    .content {
+      left: 360px;
+    }
+
+    /* Allow multi-line titles in sidebar */
+    .sidebar-nav li a {
+      white-space: normal;
+      line-height: 1.4;
+      padding-top: 6px;
+      padding-bottom: 6px;
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
@@ -17,10 +38,10 @@
       // Sidebar
       loadSidebar: true,
 
-      // 🔑 KEY LINE: collapse everything by default
+      // Fully collapsed by default
       sidebarDisplayLevel: 0,
 
-      // Optional UX niceties
+      // UX improvements
       auto2top: true
     }
   </script>
