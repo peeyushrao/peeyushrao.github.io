@@ -7,8 +7,8 @@
   - [What is alert fatigue and why is it dangerous](Interview-QA/6.md)
   - [What is a false positive and how do you confirm one?](Interview-QA/7.md)
   - [What is a true positive with low business risk](Interview-QA/8.md)
+  - [Why are accurate timestamps critical during investigations?](Interview-QA/9.md)
 - **CrowdStrike**
-  - 
 
 - **Zscaler**
   - [ZIA vs ZPA](Zscaler/zia-vs-zpa.md)
