@@ -8,6 +8,7 @@
   - [What is a false positive and how do you confirm one?](Interview-QA/7.md)
   - [What is a true positive with low business risk](Interview-QA/8.md)
   - [Why are accurate timestamps critical during investigations?](Interview-QA/9.md)
+  - [endpoint_vs_network_telemetry](Interview-QA/10.md)
 - **CrowdStrike**
 
 - **Zscaler**
