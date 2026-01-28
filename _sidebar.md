@@ -10,6 +10,7 @@
   - [Why are accurate timestamps critical during investigations?](Interview-QA/9.md)
   - [endpoint_vs_network_telemetry](Interview-QA/10.md)
   - [why_baselining_normal_behavior_matters](Interview-QA/11.md)
+  - [process_vs_service](Interview-QA/12.md)
 - **CrowdStrike**
 
 - **Zscaler**
