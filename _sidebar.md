@@ -1,5 +1,5 @@
 - **Interview Q&A**
-  - [soc_primary_mission)](Interview-QA/1.md)
+  - [soc_primary_mission](Interview-QA/1.md)
   - [Difference between an alert, a detection, and an incident](Interview-QA/2.md)
   - [Why context is more important than Severity](Interview-QA/3.md)
   - [SOC decisions risk-driven, not severity-driven](Interview-QA/4.md)
@@ -11,6 +11,7 @@
   - [endpoint_vs_network_telemetry](Interview-QA/10.md)
   - [why_baselining_normal_behavior_matters](Interview-QA/11.md)
   - [process_vs_service](Interview-QA/12.md)
+  - [role_of_explorer](Interview-QA/13.md)
 - **CrowdStrike**
 
 - **Zscaler**
