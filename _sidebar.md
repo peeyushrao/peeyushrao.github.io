@@ -1,6 +1,6 @@
 - **Interview Q&A**
   - [soc_primary_mission](Interview-QA/1.md)
-  - [Difference between an alert, a detection, and an incident](Interview-QA/2.md)
+  - [alert_vs_detection_vs_incident](Interview-QA/2.md)
   - [Why context is more important than Severity](Interview-QA/3.md)
   - [SOC decisions risk-driven, not severity-driven](Interview-QA/4.md)
   - [information to be gathered before escalating an alert](Interview-QA/5.md)
