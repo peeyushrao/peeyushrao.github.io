@@ -5,7 +5,7 @@
   - [risk_driven_vs_severity_driven_soc_decisions](Interview-QA/4.md)
   - [information_to_gather_before_escalating_an_alert](Interview-QA/5.md)
   - [alert_fatigue_and_its_dangers](Interview-QA/6.md)
-  - [What is a false positive and how do you confirm one?](Interview-QA/7.md)
+  - [false_positives_and_how_to_confirm_them](Interview-QA/7.md)
   - [What is a true positive with low business risk](Interview-QA/8.md)
   - [Why are accurate timestamps critical during investigations?](Interview-QA/9.md)
   - [endpoint_vs_network_telemetry](Interview-QA/10.md)
