@@ -1,7 +1,7 @@
 - **Interview Q&A**
   - [soc_primary_mission](Interview-QA/1.md)
   - [alert_vs_detection_vs_incident](Interview-QA/2.md)
-  - [Why context is more important than Severity](Interview-QA/3.md)
+  - [why_context_matters_more_than_severity](Interview-QA/3.md)
   - [SOC decisions risk-driven, not severity-driven](Interview-QA/4.md)
   - [information to be gathered before escalating an alert](Interview-QA/5.md)
   - [What is alert fatigue and why is it dangerous](Interview-QA/6.md)
