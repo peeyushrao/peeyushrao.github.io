@@ -12,6 +12,7 @@
   - [why_baselining_normal_behavior_matters](Interview-QA/11.md)
   - [process_vs_service](Interview-QA/12.md)
   - [role_of_explorer](Interview-QA/13.md)
+  - [why_svchost](Interview-QA/14.md)
 - **CrowdStrike**
 
 - **Zscaler**
