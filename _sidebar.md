@@ -15,6 +15,7 @@
   - [why_svchost](Interview-QA/14.md)
   - [why_execution_from_appdata_is_suspicious](Interview-QA/15.md)
   - [lolbins_and_why_they_are_dangerous](Interview-QA/16.md)
+  - [parent_child_process_relationships](Interview-QA/17.md)
 - **CrowdStrike**
 
 - **Zscaler**
