@@ -24,3 +24,6 @@
 
 - **Windows**
   - [Process vs Thread](Windows/process-vs-thread.md)
+ 
+- **Linux**
+  - [basic-linux-commands](Linux/very-basic-commands.md)
