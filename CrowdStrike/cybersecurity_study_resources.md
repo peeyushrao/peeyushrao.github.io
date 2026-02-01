@@ -1,8 +1,5 @@
 ## Cybersecurity Study Resources
 
-Below are organized resources in **Markdown (.md)** format for easy copy‑paste and reuse.
-
----
 
 ## CrowdStrike
 
@@ -24,16 +21,6 @@ Below are organized resources in **Markdown (.md)** format for easy copy‑paste
   https://1drv.ms/o/c/a5b14f742aa26d0b/IgApc2EU5QLSRLHfZ9oCyzeOAQdtr0rjYRDU-i0qboNTx28?e=KtIEbZ
 
 ---
+## This is <span style="color: red;">Use incognito mode in Browser</span>.
 
-## Suggested Usage
-
-- Use these links as a **central index** in your GitHub repo or Obsidian vault
-- Convert individual notes into:
-  - SOC playbooks
-  - Detection engineering references
-  - Interview preparation material
-
----
-
-> **Tip:** Keep these as top‑level reference links and break concepts into separate `.md` files for long‑term knowledge retention.
 
