@@ -18,7 +18,8 @@
   - [parent_child_process_relationships](Interview-QA/17.md)
   - [what_makes_a_process_tree_suspicious](Interview-QA/18.md)
 - **CrowdStrike**
-
+  - [Basic Concepts](CrowdStrike/direct-qa.md)
+  - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
 - **Zscaler**
   - [ZIA vs ZPA](Zscaler/zia-vs-zpa.md)
 
