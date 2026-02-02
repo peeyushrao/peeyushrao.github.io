@@ -25,6 +25,7 @@
 
 - **Windows**
   - [Process vs Thread](Windows/process-vs-thread.md)
+  - [What is Windows Internal Database](Windows/windows_internal_database_wid_explained.md)
  
 - **Linux**
   - [basic-linux-commands](Linux/very-basic-commands.md)
