@@ -65,8 +65,9 @@ This allows you to connect and inspect the WID instance graphically.
 
 Reference guide:
 - https://www.ajtek.ca/wsus/how-do-i-connect-to-the-windows-internal-database-wid/
-![WID Connection_1](https://github.com/peeyushrao/peeyushrao.github.io/blob/main/images/wid1.png)
-![WID Connection_2](https://github.com/peeyushrao/peeyushrao.github.io/blob/main/images/wid2.png)
+![WID Connection_1](/images/wid1.png)
+
+![WID Connection_2](/images/wid2.png)
 ---
 
 ## WSUS and WID Disk Space Issues
