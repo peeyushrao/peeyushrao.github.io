@@ -24,7 +24,7 @@
   - [ZIA vs ZPA](Zscaler/zia-vs-zpa.md)
 
 - **Windows**
-  - [Process vs Thread](Windows/process-vs-thread.md)
+  - [Process vs Thread](Windows/windows_process_vs_thread.md)
   - [What is Windows Internal Database](Windows/windows_internal_database_wid_explained.md)
  
 - **Linux**
