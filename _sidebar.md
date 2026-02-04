@@ -20,6 +20,7 @@
 - **CrowdStrike**
   - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
+- **IR**
 - **Zscaler**
   - [ZIA vs ZPA](Zscaler/zia-vs-zpa.md)
 
