@@ -19,6 +19,7 @@
   - [what_makes_a_process_tree_suspicious](Interview-QA/18.md)
   - [why_command_line_visibility_matters](Interview-QA/19.md)
   - [dll_sideloading_explained](Interview-QA/20.md)
+  - [why_attackers_prefer_signed_binaries](Interview_QA/21.md)
 - **CrowdStrike**
   - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
