@@ -22,6 +22,7 @@
   - [why_attackers_prefer_signed_binaries](Interview-QA/21.md)
   - [authentication_vs_authorization](Interview-QA/22.md)
   - [why_service_accounts_are_frequently_targeted](Interview-QA/23.md)
+  - [what_is_lateral_movement](Interview-QA/24.md)
 - **CrowdStrike**
   - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
