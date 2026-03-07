@@ -26,6 +26,7 @@
   - [what_is_credential_dumping](Interview-QA/25.md)
   - [why_ntlm_is_considered_risky](Interview-QA/26.md)
   - [what_is_pass_the_hash](Interview-QA/27.md)
+  - [why_mfa_does_not_fully_prevent_compromise](Interview-QA/28.md)
 - **CrowdStrike**
   - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
