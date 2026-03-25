@@ -29,7 +29,7 @@
   - [why_mfa_does_not_fully_prevent_compromise](Interview-QA/28.md)
 - **CrowdStrike**
   - **CQL**
-    - [host_resource_utilization](cql-system-capacity.md) 
+    - [host_resource_utilization](CQL/cql-system-capacity.md) 
   - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
 - **IR**
