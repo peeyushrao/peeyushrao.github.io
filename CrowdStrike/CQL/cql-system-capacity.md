@@ -1,6 +1,7 @@
-# System Capacity & User Activity Query
+# CQL Query  - Resource Utilization
 
 This query aggregates system capacity, user logon activity, and resource utilization data, enriched with sensor metadata.
+https://community.crowdstrike.com/falcon-platform-raptor-release-84/cql-query-help-resource-utilization-1111
 
 ## Query
 
