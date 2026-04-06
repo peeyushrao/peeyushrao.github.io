@@ -1,1 +1,123 @@
+name: Auto-update Sidebar
 
+on:
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - '!_sidebar.md'
+      - '!README.md'
+
+jobs:
+  update-sidebar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate _sidebar.md
+        run: |
+          python3 << 'EOF'
+          import os
+          import re
+
+          # Folders to include, in display order
+          # Add or remove folders here as your site grows
+          SECTIONS = [
+            ("Interview-QA",  "Interview Q&A"),
+            ("CrowdStrike",   "CrowdStrike"),
+            ("IR",            "IR"),
+            ("Zscaler",       "Zscaler"),
+            ("Windows",       "Windows"),
+            ("Linux",         "Linux"),
+          ]
+
+          def get_title(filepath):
+            """Read first # heading from file, fallback to filename."""
+            try:
+              with open(filepath, encoding="utf-8") as f:
+                for line in f:
+                  line = line.strip()
+                  if line.startswith("# "):
+                    return line[2:].strip()
+            except Exception:
+              pass
+            # Fallback: humanise filename
+            name = os.path.splitext(os.path.basename(filepath))[0]
+            return name.replace("_", " ").replace("-", " ").title()
+
+          def collect_files(folder):
+            """
+            Returns a dict: { subfolder_or_None: [list of (title, rel_path)] }
+            Files at root of folder go under None key.
+            Sub-folders become nested groups.
+            """
+            groups = {}
+            root_files = []
+
+            if not os.path.isdir(folder):
+              return {}
+
+            for entry in sorted(os.scandir(folder), key=lambda e: e.name.lower()):
+              if entry.is_dir():
+                subfiles = []
+                for sub in sorted(os.scandir(entry.path), key=lambda e: e.name.lower()):
+                  if sub.is_file() and sub.name.endswith(".md") and not sub.name.startswith("_"):
+                    rel = f"{folder}/{entry.name}/{sub.name}"
+                    subfiles.append((get_title(sub.path), rel))
+                if subfiles:
+                  groups[entry.name] = subfiles
+              elif entry.is_file() and entry.name.endswith(".md") and not entry.name.startswith("_"):
+                rel = f"{folder}/{entry.name}"
+                root_files.append((get_title(entry.path), rel))
+
+            result = {}
+            if root_files:
+              result[None] = root_files
+            result.update(groups)
+            return result
+
+          lines = []
+
+          for folder, display_name in SECTIONS:
+            groups = collect_files(folder)
+            if not groups:
+              continue
+
+            lines.append(f"- **{display_name}**")
+
+            # Root-level files first
+            for title, path in groups.get(None, []):
+              lines.append(f"  - [{title}]({path})")
+
+            # Sub-folder groups
+            for subfolder, files in groups.items():
+              if subfolder is None:
+                continue
+              lines.append(f"  - **{subfolder}**")
+              for title, path in files:
+                lines.append(f"    - [{title}]({path})")
+
+          sidebar_content = "\n".join(lines) + "\n"
+
+          with open("_sidebar.md", "w", encoding="utf-8") as f:
+            f.write(sidebar_content)
+
+          print("Generated _sidebar.md:")
+          print(sidebar_content)
+          EOF
+
+      - name: Commit updated sidebar
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _sidebar.md
+          if git diff --cached --quiet; then
+            echo "No sidebar changes to commit."
+          else
+            git commit -m "chore: auto-update _sidebar.md"
+            git push
+          fi
