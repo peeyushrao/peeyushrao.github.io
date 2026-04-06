@@ -30,7 +30,6 @@
 - **CrowdStrike**
   - **CQL**
     - [host_resource_utilization](CrowdStrike/CQL/cql-system-capacity.md) 
-  - [Basic Concepts](CrowdStrike/direct-qa.md)
   - [One Note Resource](CrowdStrike/cybersecurity_study_resources.md)
 - **IR**
 - **Zscaler**
