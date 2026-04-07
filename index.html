@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Peeyush Rao – Security Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&family=DM+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+
+  <style>
+    :root {
+      --sidebar-w: 300px;
+      --accent: #2D5A3D;
+      --accent-light: #EAF2EC;
+      --text: #1A1814;
+      --text-muted: #6B6860;
+      --text-faint: #A8A49C;
+      --border: rgba(0,0,0,0.08);
+      --bg: #F7F5F0;
+      --sidebar-bg: #F2F0EA;
+      --heading-font: 'Instrument Serif', serif;
+      --body-font: 'DM Sans', sans-serif;
+      --mono-font: 'DM Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: var(--body-font);
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+    }
+
+    /* ── Sidebar ──────────────────────────── */
+    .sidebar {
+      width: var(--sidebar-w) !important;
+      background: var(--sidebar-bg) !important;
+      border-right: 1px solid var(--border) !important;
+      padding: 0 !important;
+    }
+
+    .app-name {
+      padding: 1.75rem 1.5rem 1.25rem !important;
+      border-bottom: 1px solid var(--border) !important;
+      margin: 0 !important;
+    }
+
+    .app-name-link {
+      font-family: var(--heading-font) !important;
+      font-size: 1.1rem !important;
+      font-weight: 400 !important;
+      color: var(--text) !important;
+      line-height: 1.4 !important;
+      text-decoration: none !important;
+    }
+
+    .app-name-link em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* Search */
+    .search {
+      padding: 0.875rem 1.25rem !important;
+      border-bottom: 1px solid var(--border) !important;
+      margin: 0 !important;
+    }
+
+    .search input {
+      background: #fff !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 8px !important;
+      color: var(--text) !important;
+      font-family: var(--body-font) !important;
+      font-size: 13px !important;
+      font-weight: 300 !important;
+      padding: 7px 12px !important;
+      width: 100% !important;
+      transition: border-color 0.2s !important;
+    }
+    .search input::placeholder { color: var(--text-faint) !important; }
+    .search input:focus {
+      outline: none !important;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 3px rgba(45,90,61,0.08) !important;
+    }
+
+    /* Nav container */
+    .sidebar-nav {
+      padding: 0.75rem 0 3rem !important;
+      overflow-y: auto;
+    }
+
+    /* Section bold labels */
+    .sidebar-nav li > p,
+    .sidebar-nav li > p > strong {
+      font-size: 10.5px !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.09em !important;
+      text-transform: uppercase !important;
+      color: var(--text-faint) !important;
+      padding: 1rem 1.5rem 0.3rem !important;
+      margin: 0 !important;
+      display: block;
+    }
+
+    /* Nav links */
+    .sidebar-nav li a {
+      font-family: var(--body-font) !important;
+      font-size: 13px !important;
+      font-weight: 300 !important;
+      color: var(--text-muted) !important;
+      padding: 5px 1.5rem !important;
+      white-space: normal !important;
+      line-height: 1.5 !important;
+      display: block;
+      text-decoration: none !important;
+      border-left: 2px solid transparent !important;
+      transition: color 0.15s, background 0.15s !important;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--text) !important;
+      background: rgba(0,0,0,0.03) !important;
+    }
+
+    .sidebar-nav li a.active {
+      color: var(--accent) !important;
+      background: var(--accent-light) !important;
+      border-left-color: var(--accent) !important;
+      font-weight: 400 !important;
+    }
+
+    /* Nested */
+    .sidebar-nav ul ul li a { padding-left: 2.25rem !important; }
+    .sidebar-nav ul ul ul li a { padding-left: 3rem !important; font-size: 12.5px !important; }
+
+    /* Scrollbar */
+    .sidebar-nav::-webkit-scrollbar { width: 3px; }
+    .sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+    .sidebar-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    /* ── Content ──────────────────────────── */
+    .content {
+      left: var(--sidebar-w) !important;
+      background: var(--bg) !important;
+    }
+
+    .markdown-section {
+      max-width: 740px !important;
+      margin: 0 auto !important;
+      padding: 3rem 2.5rem 6rem !important;
+    }
+
+    /* ── Typography ───────────────────────── */
+    .markdown-section h1 {
+      font-family: var(--heading-font) !important;
+      font-size: 2.4rem !important;
+      font-weight: 400 !important;
+      line-height: 1.2 !important;
+      letter-spacing: -0.2px !important;
+      color: var(--text) !important;
+      margin: 0 0 0.5rem !important;
+      border-bottom: none !important;
+      padding-bottom: 0 !important;
+    }
+
+    .markdown-section h2 {
+      font-family: var(--heading-font) !important;
+      font-size: 1.6rem !important;
+      font-weight: 400 !important;
+      color: var(--text) !important;
+      margin: 2.5rem 0 0.875rem !important;
+      border-bottom: 1px solid var(--border) !important;
+      padding-bottom: 0.5rem !important;
+    }
+
+    .markdown-section h3 {
+      font-family: var(--body-font) !important;
+      font-size: 1rem !important;
+      font-weight: 500 !important;
+      color: var(--text) !important;
+      margin: 2rem 0 0.625rem !important;
+    }
+
+    .markdown-section h4 {
+      font-family: var(--body-font) !important;
+      font-size: 0.9rem !important;
+      font-weight: 500 !important;
+      color: var(--text-muted) !important;
+      margin: 1.5rem 0 0.5rem !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.05em !important;
+    }
+
+    .markdown-section p {
+      font-size: 15px !important;
+      line-height: 1.85 !important;
+      color: var(--text-muted) !important;
+      font-weight: 300 !important;
+      margin: 0 0 1rem !important;
+    }
+
+    .markdown-section strong {
+      font-weight: 500 !important;
+      color: var(--text) !important;
+    }
+
+    .markdown-section a {
+      color: var(--accent) !important;
+      text-decoration: underline !important;
+      text-underline-offset: 3px !important;
+      text-decoration-thickness: 1px !important;
+    }
+    .markdown-section a:hover { opacity: 0.75 !important; }
+
+    /* Lists */
+    .markdown-section ul,
+    .markdown-section ol {
+      padding-left: 1.4rem !important;
+      margin: 0.5rem 0 1rem !important;
+    }
+
+    .markdown-section li {
+      font-size: 15px !important;
+      line-height: 1.8 !important;
+      color: var(--text-muted) !important;
+      font-weight: 300 !important;
+      margin-bottom: 3px !important;
+    }
+
+    .markdown-section li strong { color: var(--text) !important; }
+
+    /* Inline code */
+    .markdown-section code {
+      font-family: var(--mono-font) !important;
+      font-size: 12.5px !important;
+      background: rgba(45,90,61,0.07) !important;
+      color: var(--accent) !important;
+      padding: 2px 6px !important;
+      border-radius: 5px !important;
+      border: none !important;
+    }
+
+    /* Code blocks */
+    .markdown-section pre {
+      background: #1A1814 !important;
+      border-radius: 10px !important;
+      padding: 1.25rem 1.5rem !important;
+      margin: 1.25rem 0 !important;
+      overflow-x: auto !important;
+      border: none !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+    }
+
+    .markdown-section pre code {
+      background: transparent !important;
+      color: #C8E6C9 !important;
+      font-size: 13px !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    /* Blockquote */
+    .markdown-section blockquote {
+      border-left: 3px solid var(--accent) !important;
+      background: var(--accent-light) !important;
+      margin: 1.25rem 0 !important;
+      padding: 0.75rem 1.25rem !important;
+      border-radius: 0 8px 8px 0 !important;
+    }
+
+    .markdown-section blockquote p {
+      color: var(--accent) !important;
+      margin: 0 !important;
+    }
+
+    /* Tables */
+    .markdown-section table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      font-size: 14px !important;
+      margin: 1.25rem 0 !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 10px !important;
+      overflow: hidden !important;
+    }
+
+    .markdown-section th {
+      background: var(--sidebar-bg) !important;
+      color: var(--text-muted) !important;
+      font-weight: 500 !important;
+      font-size: 12px !important;
+      letter-spacing: 0.04em !important;
+      text-transform: uppercase !important;
+      padding: 10px 14px !important;
+      text-align: left !important;
+    }
+
+    .markdown-section td {
+      padding: 10px 14px !important;
+      border-bottom: 1px solid var(--border) !important;
+      color: var(--text-muted) !important;
+      font-weight: 300 !important;
+      vertical-align: top !important;
+    }
+
+    .markdown-section tr:last-child td { border-bottom: none !important; }
+    .markdown-section tr:nth-child(even) td { background: rgba(0,0,0,0.015) !important; }
+
+    /* HR */
+    .markdown-section hr {
+      border: none !important;
+      border-top: 1px solid var(--border) !important;
+      margin: 2rem 0 !important;
+    }
+
+    /* ── Mobile ───────────────────────────── */
+    @media (max-width: 768px) {
+      .content { left: 0 !important; }
+      .markdown-section { padding: 2rem 1.25rem 4rem !important; }
+      .markdown-section h1 { font-size: 1.9rem !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script>
+    window.$docsify = {
+      name: 'Peeyush Rao – <em>Security Notes</em>',
+      loadSidebar: true,
+      sidebarDisplayLevel: 0,
+      auto2top: true,
+      search: {
+        placeholder: 'Search notes…',
+        noData: 'Nothing found.',
+        depth: 3
+      }
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-sidebar-collapse/dist/docsify-sidebar-collapse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+</body>
+</html>

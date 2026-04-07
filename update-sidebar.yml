@@ -1,0 +1,106 @@
+name: Auto-update Sidebar
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**/*.md'
+      - '!_sidebar.md'
+      - '!README.md'
+
+jobs:
+  update-sidebar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate _sidebar.md
+        run: |
+          python3 << 'PYEOF'
+          import os
+          import re
+
+          SECTIONS = [
+            ("Interview-QA", "Interview Q&A"),
+            ("CrowdStrike",  "CrowdStrike"),
+            ("IR",           "IR"),
+            ("Zscaler",      "Zscaler"),
+            ("Windows",      "Windows"),
+            ("Linux",        "Linux"),
+          ]
+
+          def natural_sort_key(name):
+            """Sort so that 1,2,3...10,11 not 1,10,11,2,3"""
+            return [int(c) if c.isdigit() else c.lower() for c in re.split(r'(\d+)', name)]
+
+          def get_title(filepath):
+            """Read first # heading. If none, humanise the filename."""
+            try:
+              with open(filepath, encoding="utf-8") as f:
+                for line in f:
+                  stripped = line.strip()
+                  if stripped.startswith("# "):
+                    return stripped[2:].strip()
+            except Exception:
+              pass
+            name = os.path.splitext(os.path.basename(filepath))[0]
+            # If purely numeric keep as-is so we can see it's missing a heading
+            if name.isdigit():
+              return f"Article {name} (no heading)"
+            return name.replace("_", " ").replace("-", " ").title()
+
+          def collect(folder):
+            if not os.path.isdir(folder):
+              return {}, []
+            subgroups = {}
+            root_files = []
+            entries = sorted(os.scandir(folder), key=lambda e: natural_sort_key(e.name))
+            for entry in entries:
+              if entry.is_dir():
+                files = []
+                subs = sorted(os.scandir(entry.path), key=lambda e: natural_sort_key(e.name))
+                for sub in subs:
+                  if sub.is_file() and sub.name.endswith(".md") and not sub.name.startswith("_"):
+                    files.append((get_title(sub.path), f"{folder}/{entry.name}/{sub.name}"))
+                if files:
+                  subgroups[entry.name] = files
+              elif entry.is_file() and entry.name.endswith(".md") and not entry.name.startswith("_"):
+                root_files.append((get_title(entry.path), f"{folder}/{entry.name}"))
+            return subgroups, root_files
+
+          lines = []
+          for folder, label in SECTIONS:
+            subgroups, root_files = collect(folder)
+            if not subgroups and not root_files:
+              continue
+            lines.append(f"- **{label}**")
+            for title, path in root_files:
+              lines.append(f"  - [{title}]({path})")
+            for sub, files in subgroups.items():
+              lines.append(f"  - **{sub}**")
+              for title, path in files:
+                lines.append(f"    - [{title}]({path})")
+
+          with open("_sidebar.md", "w", encoding="utf-8") as f:
+            f.write("\n".join(lines) + "\n")
+
+          print("Done:")
+          print("\n".join(lines))
+          PYEOF
+
+      - name: Commit updated sidebar
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _sidebar.md
+          if git diff --cached --quiet; then
+            echo "No changes."
+          else
+            git commit -m "chore: auto-update _sidebar.md"
+            git push
+          fi
