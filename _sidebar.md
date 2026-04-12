@@ -32,6 +32,7 @@
   - [Incident Response Phases: A Defender's Playbook](Interview-QA/31.md)
   - [Why Containment Comes Before Eradication](Interview-QA/32.md)
   - [When to Isolate a Host — And Why It's Not Always Obvious](Interview-QA/33.md)
+  - [Scoping: Why It Determines Whether You Actually Solved the Incident](Interview-QA/34.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
