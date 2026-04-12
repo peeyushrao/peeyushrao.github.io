@@ -29,6 +29,7 @@
   - [Why Does MFA Not Fully Prevent Compromise?](Interview-QA/28.md)
   - [Detecting Account Compromise: Logs That Matter](Interview-QA/29.md)
   - [Principle of Least Privilege (PoLP): A Defender's Playbook](Interview-QA/30.md)
+  - [Incident Response Phases: A Defender's Playbook](Interview-QA/31.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
