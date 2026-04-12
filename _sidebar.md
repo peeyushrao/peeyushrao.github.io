@@ -27,6 +27,7 @@
   - [Why Is NTLM Considered Risky?](Interview-QA/26.md)
   - [What Is Pass-the-Hash?](Interview-QA/27.md)
   - [Why Does MFA Not Fully Prevent Compromise?](Interview-QA/28.md)
+  - [Detecting Account Compromise: Logs That Matter](Interview-QA/29.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
