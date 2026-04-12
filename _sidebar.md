@@ -1,6 +1,6 @@
 - **Interview Q&A**
   - [What is the primary mission of a Security Operations Center (SOC)?](Interview-QA/1.md)
-  - [2. What is the difference between an alert, a detection, and an incident?](Interview-QA/2.md)
+  - [What is the difference between an alert, a detection, and an incident?](Interview-QA/2.md)
   - [Why is context more important than severity alone?](Interview-QA/3.md)
   - [SOC decisions should be risk-driven, not severity-driven](Interview-QA/4.md)
   - [What information should be gathered before escalating an alert?](Interview-QA/5.md)
