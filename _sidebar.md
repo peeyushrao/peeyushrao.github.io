@@ -36,6 +36,7 @@
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
+  - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
   - **CQL**
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
 - **IR**
