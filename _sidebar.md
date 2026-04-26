@@ -35,6 +35,7 @@
   - [Scoping: Why It Determines Whether You Actually Solved the Incident](Interview-QA/34.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
+  - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
   - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
   - **CQL**
