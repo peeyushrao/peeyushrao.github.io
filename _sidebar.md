@@ -38,6 +38,7 @@
   - [What is an IOC and why are IOCs insufficient?](Interview-QA/37.md)
   - [SIEM, Log Normalization, Correlation Rules & Telemetry Blind Spots](Interview-QA/38.md)
   - [Static Detection vs Behavioral Detection (Full Notes)](Interview-QA/39.md)
+  - [Detection Gaps, MITRE ATT&CK Mapping, and Detection Coverage vs Quality](Interview-QA/40.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
