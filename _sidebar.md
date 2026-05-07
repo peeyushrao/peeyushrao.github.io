@@ -55,3 +55,6 @@
   - [Process vs Thread in Windows](Windows/windows_process_vs_thread.md)
 - **Linux**
   - [🐧 Master Linux Commands For Beginners: The Ultimate Handbook](Linux/very-basic-commands.md)
+- **Arsenal**
+  - [CrowdStrike — Find Mac Users from a List of Usernames](Arsenal/excel_notes.md)
+  - [Readme](Arsenal/readme.md)
