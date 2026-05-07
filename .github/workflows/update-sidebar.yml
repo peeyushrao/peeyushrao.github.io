@@ -32,6 +32,7 @@ jobs:
             ("Zscaler",      "Zscaler"),
             ("Windows",      "Windows"),
             ("Linux",        "Linux"),
+            ("Arsenal",      "Arsenal"),
           ]
 
           def natural_sort_key(name):
