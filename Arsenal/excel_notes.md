@@ -72,3 +72,8 @@ You have a list of usernames and want to find out which ones are using macOS, al
 ---
 
 *Scenario: Cross-referencing usernames against CrowdStrike Falcon host export to identify macOS users.*
+
+## How to Extract username from email (in your 100 emails sheet)
+In column B, next to your email in column A:
+=LEFT(A2, FIND("@", A2)-1)
+This converts john.doe@company.com → john.doe
