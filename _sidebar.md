@@ -47,6 +47,7 @@
   - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
   - **CQL**
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
+    - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
 - **IR**
   - [Basics](IR/basics.md)
