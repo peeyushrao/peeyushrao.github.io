@@ -25,15 +25,16 @@ jobs:
           import os
           import re
 
-          SECTIONS = [
-            ("Interview-QA", "Interview Q&A"),
-            ("CrowdStrike",  "CrowdStrike"),
-            ("IR",           "IR"),
-            ("Zscaler",      "Zscaler"),
-            ("Windows",      "Windows"),
-            ("Linux",        "Linux"),
+          SECTIONS = [            
             ("Arsenal",      "Arsenal"),
-          ]
+            ("CrowdStrike",  "CrowdStrike"),
+            ("CWPP/Kubernetes",           "CWPP/Kubernetes"),
+            ("IR",           "IR"),
+            ("Interview-QA", "Interview Q&A"),
+            ("Linux",        "Linux"),
+            ("Windows",      "Windows"),
+            ("Zscaler",      "Zscaler"),       
+            ]
 
           def natural_sort_key(name):
             return [int(c) if c.isdigit() else c.lower() for c in re.split(r'(\d+)', name)]
