@@ -14,6 +14,7 @@
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
 - **CWPP**
   - [Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
+  - [Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
 - **IR**
   - [Basics](IR/basics.md)
 - **Interview Q&A**
