@@ -28,7 +28,7 @@ jobs:
           SECTIONS = [            
             ("Arsenal",      "Arsenal"),
             ("CrowdStrike",  "CrowdStrike"),
-            ("CWPP/Kubernetes",           "CWPP/Kubernetes"),
+            ("CWPP",         "CWPP"),
             ("IR",           "IR"),
             ("Interview-QA", "Interview Q&A"),
             ("Linux",        "Linux"),
