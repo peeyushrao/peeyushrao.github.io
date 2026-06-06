@@ -1,3 +1,18 @@
+- **Arsenal**
+  - [CrowdStrike — Find Mac Users from a List of Usernames](Arsenal/excel_notes.md)
+  - [Readme](Arsenal/readme.md)
+- **CrowdStrike**
+  - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
+  - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
+  - [CrowdStrike Falcon Admin Interview Questions — The Complete Guide](CrowdStrike/crowdstrike-falcon-admin-interview-questions.md)
+  - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
+  - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
+  - **CQL**
+    - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
+    - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
+    - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
+- **IR**
+  - [Basics](IR/basics.md)
 - **Interview Q&A**
   - [What is the primary mission of a Security Operations Center (SOC)?](Interview-QA/1.md)
   - [What is the difference between an alert, a detection, and an incident?](Interview-QA/2.md)
@@ -39,26 +54,10 @@
   - [SIEM, Log Normalization, Correlation Rules & Telemetry Blind Spots](Interview-QA/38.md)
   - [Static Detection vs Behavioral Detection (Full Notes)](Interview-QA/39.md)
   - [Detection Gaps, MITRE ATT&CK Mapping, and Detection Coverage vs Quality](Interview-QA/40.md)
-- **CrowdStrike**
-  - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
-  - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
-  - [CrowdStrike Falcon Admin Interview Questions — The Complete Guide](CrowdStrike/crowdstrike-falcon-admin-interview-questions.md)
-  - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
-  - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
-  - **CQL**
-    - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
-    - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
-    - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
-- **IR**
-  - [Basics](IR/basics.md)
-- **Zscaler**
-  - [Zia Vs Zpa](Zscaler/zia-vs-zpa.md)
+- **Linux**
+  - [🐧 Master Linux Commands For Beginners: The Ultimate Handbook](Linux/very-basic-commands.md)
 - **Windows**
   - [What is Windows Internal Database (WID)?](Windows/windows_internal_database_wid_explained.md)
   - [Process vs Thread in Windows](Windows/windows_process_vs_thread.md)
-- **Linux**
-  - [🐧 Master Linux Commands For Beginners: The Ultimate Handbook](Linux/very-basic-commands.md)
-- **Arsenal**
-  - [CrowdStrike — Find Mac Users from a List of Usernames](Arsenal/excel_notes.md)
-  - [Readme](Arsenal/readme.md)
-- **CWPP/Kubernetes**
+- **Zscaler**
+  - [Zia Vs Zpa](Zscaler/zia-vs-zpa.md)
