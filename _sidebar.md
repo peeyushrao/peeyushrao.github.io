@@ -12,6 +12,8 @@
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
 - **CWPP**
+  - [Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
+  - [Kubernetes Training – Day 1 Study Guide](CWPP/Kubernetes_Day1.md)
 - **IR**
   - [Basics](IR/basics.md)
 - **Interview Q&A**
