@@ -433,3 +433,695 @@ Both copy files from the host into the container's filesystem. `COPY` handles re
 ---
 
 > **Up next — Day 2:** Container orchestration. Comparing Docker Swarm and Kubernetes, Kubernetes architecture, setting up a cluster, and Pods (containers in Kubernetes). The `docker exec` pattern you learned today carries directly into `kubectl exec`.
+
+
+# Docker — Day 1 Lab Notes
+
+> **Official instructor notes** — companion reference to the Day 1 training session.
+
+---
+
+## Table of Contents
+
+1. [Install Docker](#install-docker)
+2. [Docker Images](#docker-images)
+3. [Running Containers](#running-containers)
+4. [Foreground Mode (`-it`)](#foreground-mode--it)
+5. [Detached Mode (`-d`)](#detached-mode--d)
+6. [Container Management Commands](#container-management-commands)
+7. [Port Mapping](#port-mapping)
+8. [Commit a Container to an Image](#commit-a-container-to-an-image)
+9. [Dockerfile](#dockerfile)
+10. [Jenkins CI/CD Pipeline with Docker](#jenkins-cicd-pipeline-with-docker)
+11. [GitHub Actions — Build & Push Docker Image](#github-actions--build--push-docker-image)
+12. [Docker Swarm — Container Orchestration](#docker-swarm--container-orchestration)
+13. [Docker Stack — Multi-Service Deployment](#docker-stack--multi-service-deployment)
+14. [Docker Swarm vs. Kubernetes — Quick Comparison](#docker-swarm-vs-kubernetes--quick-comparison)
+
+---
+
+## Install Docker
+
+### Ubuntu 22.04
+
+```bash
+# Add Docker's official GPG key
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt-get update
+
+# Install Docker
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+systemctl start docker
+```
+
+### Amazon Linux 2023
+
+```bash
+sudo yum install -y docker
+sudo yum update -y
+sudo systemctl enable docker
+sudo systemctl start docker
+docker --version
+```
+
+---
+
+## Docker Images
+
+By default, no images exist on the Docker host. All images are pulled from Docker Hub.
+
+```bash
+# List images on the Docker host
+docker images
+
+# Pull an image (latest tag)
+docker pull ubuntu
+
+# Pull a specific tag
+docker pull ubuntu:20.04
+
+# View image build history and layers
+docker history ubuntu
+docker history ubuntu:20.04
+
+# Delete an image
+docker rmi ubuntu
+docker rmi ubuntu:20.04
+```
+
+### Image Naming Format
+
+```
+registrypath/reponame/imagename:tagname
+```
+
+Examples:
+
+```bash
+docker pull ubuntu                              # docker.io/library/ubuntu:latest
+docker pull sonal04/myimage:01                  # Docker Hub user image
+docker pull awsRegistry/reponame/imagename      # Private registry
+docker pull 172.34.56:5000/repo1/imagename      # Self-hosted registry with IP:port
+```
+
+---
+
+## Running Containers
+
+```bash
+# Pull image and run a container (exits immediately for OS images)
+docker pull ubuntu
+docker run ubuntu
+
+# List all containers (running + exited)
+docker ps -a
+
+# Run a container with a custom name
+docker run --name cont1 ubuntu
+```
+
+> **Note:** When containers are in exited state, Docker allocates no CPU or memory to them.
+
+```bash
+# Check resource usage of running containers
+docker stats
+# Press Ctrl+C to return to terminal
+```
+
+---
+
+## Foreground Mode (`-it`)
+
+`-i` = interactive, `-t` = terminal. The container starts running and your terminal is attached to it.
+
+```bash
+# Run Ubuntu in foreground (interactive terminal)
+docker run --name u1 -it ubuntu
+
+# Exit the container WITHOUT stopping it
+# Press: Ctrl + P, then Q
+
+# Check status (container should still be Running)
+docker ps -a
+
+# Re-attach to a running container
+docker attach <containername_or_id>
+# Example:
+docker attach 525ee7990ca0
+
+# Exit the container and stop it
+exit
+# You return to the VM; container status becomes Exited.
+```
+
+> **Note:** `docker attach` only works on running containers. You cannot attach to an exited container.
+
+```bash
+# Start an exited container
+docker start <containername_or_id>
+```
+
+---
+
+## Detached Mode (`-d`)
+
+The container runs in the background. You remain on the host machine.
+
+```bash
+# Run nginx in detached mode
+docker run --name web -d nginx
+
+# Run a command on a detached container (without entering it)
+docker exec web uname
+
+# Open an interactive shell inside a detached container
+docker exec -it web bash
+# Type exit to leave — the container keeps running
+
+# Check running containers
+docker ps
+
+# Check container logs
+docker logs <containername>
+
+# Inspect full container details (JSON)
+docker inspect <containername_or_id>
+```
+
+---
+
+## Container Management Commands
+
+```bash
+# Stop a running container (graceful)
+docker stop <containername>
+
+# Kill a running container (immediate)
+docker kill <containername>
+
+# Delete all containers (running + stopped) forcefully
+docker rm -f $(docker ps -aq)
+
+# Delete all stopped containers AND dangling images
+docker system prune --all
+# Enter y to confirm
+```
+
+---
+
+## Port Mapping
+
+By default, a container is only accessible on its internal target port. Browsers and external users cannot reach it without port mapping.
+
+**Rules:**
+- Port mapping must be specified at `docker run` time — it cannot be added to an existing container.
+- To change port mapping: delete the container and recreate it with the new `-p` flag.
+- `-p` = explicit mapping; `-P` = Docker picks a random available host port.
+
+```bash
+# Explicit mapping: host port 8989 → container port 80
+docker run -d -p 8989:80 --name web1 nginx
+
+# Auto mapping: Docker assigns a free host port
+docker run -d -P --name web2 httpd
+
+# Check which host port was assigned
+docker ps -a   # See the Ports column
+```
+
+Access the app in the browser:
+
+```
+http://<publicIP>:<host-port>
+```
+
+### Demo — Deploy a Custom HTML Page on nginx
+
+```bash
+# Start nginx with port mapping
+docker run -d -p 8989:80 --name web1 nginx
+
+# Enter the container
+docker exec -it web1 bash
+
+# Replace the default nginx page
+cd /usr/share/nginx/html
+echo "This is docker session by Sonal Mittal" > index.html
+exit
+
+# Refresh the browser — new page is live
+```
+
+---
+
+## Commit a Container to an Image
+
+Use `docker commit` to snapshot a customised container as a reusable image.
+
+```bash
+# Start Ubuntu and customise it
+docker run -it --name cont1 ubuntu
+
+# Inside the container:
+apt-get update && apt-get install git -y
+apt-get install tree -y
+
+# Exit without stopping
+# Ctrl + P, Q
+
+# Commit the container to a new image
+docker commit cont1 myimage01
+
+docker images   # myimage01 appears in the list
+
+# Clean up old containers
+docker rm -f $(docker ps -aq)
+
+# Run a new container from your custom image
+docker run -it --name cont02 myimage01
+
+# Verify customisations are present
+git --version
+tree --version
+
+exit
+```
+
+---
+
+## Dockerfile
+
+A Dockerfile is a plain text file (named `Dockerfile` or `dockerfile`) containing build instructions.
+
+```
+Dockerfile → docker build → Image → docker run → Container
+```
+
+Each line is: `KEYWORD argument`  
+Keywords are always UPPERCASE. Use `#` for comments.
+
+### Dockerfile Keywords
+
+| Keyword | Purpose | Repeatable? |
+|---|---|---|
+| `FROM` | Sets the base image. Always the first line. | No |
+| `RUN` | Executes Linux commands during build (install packages, create dirs, run scripts). Commands run and complete before the container starts. | Yes |
+| `COPY` | Copies files from the host into the container's filesystem. Cannot handle tar files. | Yes |
+| `ADD` | Like `COPY` but also extracts `.tar` archives into the container. | Yes |
+| `EXPOSE` | Declares the port the container application listens on. Used during port mapping. | Yes |
+| `CMD` | The final command executed when the container starts. Can be overridden at runtime by passing a new command to `docker run`. | No (last wins) |
+
+### Demo 1 — nginx Serving a Custom HTML Page
+
+**File structure:**
+
+```
+mydockerfiles/
+├── Dockerfile
+└── index.html
+```
+
+```bash
+sudo su -
+mkdir mydockerfiles
+cd mydockerfiles
+vim dockerfile
+```
+
+**Dockerfile:**
+
+```dockerfile
+# Dockerfile to deploy an HTML page via nginx
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install nginx -y
+COPY index.html /var/www/html/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+**index.html:**
+
+```html
+This file is from docker
+```
+
+**Build and run:**
+
+```bash
+# Clean up first
+docker rm -f $(docker ps -aq)
+docker system prune --all   # enter y
+
+# Build the image
+docker build -t myimage03 .
+
+docker images
+
+# Run with auto port mapping
+docker run -d -P myimage03
+```
+
+### Demo 2 — Python Flask Application
+
+```bash
+cd
+mkdir mydockerfile1
+cd mydockerfile1
+vim app.py
+```
+
+**app.py:**
+
+```python
+from flask import Flask
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return ('\nHello from Container World! \n\n')
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080, debug=True)
+```
+
+**Dockerfile:**
+
+```dockerfile
+FROM ubuntu:20.04
+RUN apt update && apt install python3 -y && apt install python3-flask -y
+COPY app.py /tmp
+EXPOSE 8080
+CMD ["python3", "/tmp/app.py"]
+```
+
+```bash
+docker build -t myimage01 .
+docker run -d -P myimage01
+```
+
+---
+
+## Jenkins CI/CD Pipeline with Docker
+
+Before running the pipeline, grant Jenkins permission to run Docker commands:
+
+```bash
+chmod 777 /var/run/docker.sock
+```
+
+**Jenkinsfile:**
+
+```groovy
+pipeline {
+    tools {
+        maven 'mymaven'
+    }
+    agent any
+    stages {
+        stage('clone repo') {
+            steps {
+                git 'https://github.com/Sonal0409/DevOpsCodeDemo.git'
+            }
+        }
+        stage('Build Code') {
+            steps {
+                sh 'mvn package'
+            }
+        }
+        stage('build Image') {
+            steps {
+                sh 'cp /var/lib/jenkins/workspace/CICDpipeline/target/addressbook.war .'
+                sh 'docker build -t myaddressbook .'
+            }
+        }
+        stage('push Image') {
+            steps {
+                withCredentials([string(credentialsId: 'DOCKER_HUB_PASWD', variable: 'DOCKER_HUB_PASWD')]) {
+                    sh 'docker login -u edu123 -p ${DOCKER_HUB_PASWD}'
+                }
+                sh 'docker tag myaddressbook edu123/myaddressbook'
+                sh 'docker push edu123/myaddressbook'
+            }
+        }
+        stage('Deploy container') {
+            steps {
+                sh 'docker run -d -P edu123/myaddressbook'
+            }
+        }
+    }
+}
+```
+
+---
+
+## GitHub Actions — Build & Push Docker Image
+
+Reference repo: [MavenBuild-Docker-GitHubActions](https://github.com/SkillfymeOrganization/MavenBuild-Docker-GitHubActions.git)
+
+```yaml
+name: Code build and Deploy
+on: push
+
+env:
+  imageName: "myjavaapp"
+
+jobs:
+  CICDjob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the current repository on the runner
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17 and maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Build with Maven
+        run: mvn package
+
+      - name: Install docker
+        uses: docker/setup-docker-action@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imageName }}:latest
+
+  DeployJob:
+    needs: CICDjob
+    runs-on: self-hosted
+    steps:
+      - name: Deploy the Image
+        run: |
+          docker run -d -P ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.imageName }}:latest
+          docker ps -a
+```
+
+> **Push Docker Image to ECR:** [Video guide](https://vimeo.com/781458714/3c31cf3073)
+
+---
+
+## Docker Swarm — Container Orchestration
+
+Docker Swarm is Docker's built-in orchestration tool. No separate installation required.
+
+### Cluster Setup
+
+**On the Manager node:**
+
+```bash
+# Clean up existing containers and images
+docker rm -f $(docker ps -aq)
+docker system prune --all   # enter y
+
+# Set hostname
+hostname MANAGER
+sudo su -
+
+# Initialise swarm — this generates a join token
+docker swarm init
+# Copy the generated token
+```
+
+**On each Worker node (repeat for WORKER1, WORKER2, ...):**
+
+```bash
+sudo hostname WORKER1
+sudo su -
+
+# Install Docker
+yum install docker -y
+systemctl start docker
+
+# Join the swarm (paste the token from the manager)
+# If you lost the token, regenerate it on the manager:
+docker swarm join-token worker
+# Then paste the output command on the worker
+```
+
+### Swarm Service Commands
+
+```bash
+# Create a service with 4 replicas
+docker service create --name mysvc --replicas 4 -p 8989:80 nginx
+
+# List services
+docker service ls
+
+# List tasks (which node each replica runs on)
+docker service ps mysvc
+
+# Scale up
+docker service scale mysvc=6
+
+# Scale down
+docker service scale mysvc=2
+
+# Rolling update (new image version)
+docker service update --image sonal04/samplepyapp:v2 mysvc
+
+# Rollback to previous version
+docker service rollback mysvc
+
+# Delete a service
+docker service rm mysvc
+```
+
+### Global Mode Service
+
+Creates exactly 1 replica on every node in the cluster. Auto-deploys to new nodes when they join.
+
+```bash
+docker service create --name mysvc --mode global nginx
+```
+
+> Cannot scale up or down — always 1 replica per node.
+
+---
+
+## Docker Stack — Multi-Service Deployment
+
+Docker Stack = Docker Compose + Docker Swarm. Deploys multiple microservices across the cluster with a single command.
+
+**myapp.yml:**
+
+```yaml
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+    networks:
+      - frontend
+    deploy:
+      replicas: 1
+
+  db:
+    image: postgres:9.4
+    networks:
+      - backend
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: "db"
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  vote:
+    image: dockersamples/examplevotingapp_vote:before
+    ports:
+      - 5000:80
+    networks:
+      - frontend
+    depends_on:
+      - redis
+    deploy:
+      replicas: 2
+
+  result:
+    image: dockersamples/examplevotingapp_result:before
+    ports:
+      - 5001:80
+    networks:
+      - backend
+    depends_on:
+      - db
+    deploy:
+      replicas: 1
+
+  worker:
+    image: dockersamples/examplevotingapp_worker
+    networks:
+      - frontend
+      - backend
+    depends_on:
+      - db
+      - redis
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+networks:
+  frontend:
+  backend:
+
+volumes:
+  db_data:
+```
+
+```bash
+# Deploy the stack
+docker stack deploy -c myapp.yml myvotingapp
+
+# List all services in the stack
+docker service ls
+```
+
+Reference app: [example-voting-app](https://github.com/dockersamples/example-voting-app.git)
+
+---
+
+## Docker Swarm vs. Kubernetes — Quick Comparison
+
+| Feature | Docker Swarm | Kubernetes (K8s) |
+|---|---|---|
+| Installation | Built into Docker — no extra install | Must be installed; available as managed service (EKS, GKE, AKS, DOKS) |
+| Container runtime | Docker only | Any CRI-compatible runtime (Docker, containerd, CRI-O) |
+| Roles | Manager + Worker nodes | Master + Worker nodes |
+| Scheduling | Manager and Worker nodes both | Worker nodes only (by default) |
+| Auto-scaling | Not supported | Horizontal Pod Autoscaler (HPA); cluster autoscaling on cloud |
+| Storage | No external storage support | Persistent Volumes, Persistent Volume Claims, external storage |
+| Object model | Single object type: Service | Multiple objects: Pod, ReplicaSet, Deployment, Service, Job, CronJob, etc. |
+| Scheduling techniques | Basic deployment constraints | Rich scheduling (affinity, taints, tolerations, node selectors) |
+| GUI dashboard | Not available in community edition | Built-in dashboard available |
+| GitOps integration | Limited | Integrates with ArgoCD, FluxCD for multi-cluster management |
+| Jobs / CronJobs | Not supported | Natively supported |
