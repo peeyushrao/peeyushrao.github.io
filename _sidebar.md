@@ -15,6 +15,7 @@
 - **CWPP**
   - [Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
+  - [Kubernetes Scheduling, Storage, ConfigMaps, Secrets & StatefulSets](CWPP/kubernetes-scheduling-storage-day4.md)
   - [Kubernetes Services, Deployments & Auto-Scaling](CWPP/kubernetes-services-deployment-scaling-day3.md)
 - **IR**
   - [Basics](IR/basics.md)
