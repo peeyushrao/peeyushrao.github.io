@@ -1,4 +1,4 @@
-# CrowdStrike — Find Mac Users from a List of Usernames
+# Excel Notes
 
 ## Scenario
 You have a list of usernames and want to find out which ones are using macOS, along with their hostnames — using CrowdStrike Falcon export and Excel.
