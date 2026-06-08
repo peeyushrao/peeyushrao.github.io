@@ -1,5 +1,5 @@
 - **Arsenal**
-  - [CrowdStrike — Find Mac Users from a List of Usernames](Arsenal/excel_notes.md)
+  - [Excel Notes](Arsenal/excel_notes.md)
   - [Readme](Arsenal/readme.md)
   - [Local Video Transcription Knowledge Base](Arsenal/video _transcription_how_to.md)
 - **CrowdStrike**
