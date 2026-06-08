@@ -270,7 +270,6 @@ Now that we understand images, containers, Docker Hub, and Dockerfiles, we can m
 
 For demonstration purposes, I have already created a virtual machine in AWS using Ubuntu. While Docker can run on Windows, most production environments run Docker and Kubernetes on Linux-based operating systems.
 
-So for the remainder of the session, we'll work with an Ubuntu virtual machine and start exploring Docker practically.
 ----------------------------------------------
 A container is a **lightweight, isolated process** created by a container runtime like Docker. It is not a virtual machine.
 
