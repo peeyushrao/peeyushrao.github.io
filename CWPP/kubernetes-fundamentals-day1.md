@@ -60,11 +60,9 @@ Install a **container runtime** (Docker, containerd) on any host — physical or
 > **Real-world scale:** Google creates and terminates millions of containers per week. That's the level of agility containers enable.
 
 ---
-Yes. For first-pass cleanup, I would keep the conversational teaching style intact and only fix grammar, repetition, and structure. That preserves the instructor's voice and makes it easier to create polished notes later.
 
----
 
-The classic problem in software development is: *"The code works on my machine but not in the production environment."*
+The classic problem in software development is: **"The code works on my machine but not in the production environment."**
 
 One solution is to create a package that contains not only the application code but also all its dependent libraries and runtime requirements, such as Java, Tomcat, Ubuntu, configuration files, and other dependencies. We package everything together and ship it to the production environment. Once this package is available, the user simply runs it. The application gets an environment that already contains all the required libraries and dependencies, so it behaves exactly the same way as it did during development. Anyone accessing the application over the internet is interacting with this packaged environment.
 
