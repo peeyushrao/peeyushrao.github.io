@@ -1,7 +1,7 @@
 - **Arsenal**
   - [Excel Notes](Arsenal/excel_notes.md)
   - [Readme](Arsenal/readme.md)
-  - [Local Video Transcription Knowledge Base](Arsenal/video _transcription_how_to.md)
+  - [Video Transcription Knowledge Base](Arsenal/video _transcription_how_to.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
