@@ -1,7 +1,7 @@
 - **Arsenal**
   - [Excel Notes](Arsenal/excel_notes.md)
   - [Random Tid-Bits and Technical Commom Sense Notes](Arsenal/readme.md)
-  - [Video Transcription Knowledge Base](Arsenal/video_transcription_how_to.md)
+  - [Video Transcription Knowledge Base](Arsenal/video _transcription_how_to.md)
 - **CrowdStrike**
   - [CrowdStrike & Cloud Security — A Deep Dive](CrowdStrike/1_CrowdStrike_Cloud_Security_Deep_Dive.md)
   - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
@@ -15,6 +15,7 @@
 - **CWPP**
   - [Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
+  - [Kubernetes Services, Deployments & Auto-Scaling](CWPP/kubernetes-services-deployment-scaling-day3.md)
 - **IR**
   - [Basics](IR/basics.md)
 - **Interview Q&A**
