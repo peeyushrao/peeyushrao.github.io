@@ -1,6 +1,6 @@
-# Local Video Transcription Knowledge Base
+# Video Transcription Knowledge Base
 
-> A practical guide for transcribing large training videos locally using OpenAI Whisper and Faster-Whisper.
+## A practical guide for transcribing large training videos locally using OpenAI Whisper and Faster-Whisper.
 
 ---
 
