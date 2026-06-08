@@ -95,7 +95,183 @@ Another important capability is resource management. By default, a container cou
 
 
 ## What Is a Container?
+---------------
+Before we move ahead and start creating hundreds of containers, let's first understand how a container comes into existence.
 
+Technically, containers are never "created"; containers are launched. So how are they launched?
+
+We start with a machine, either Windows or Linux, on which Docker is installed. The machine where Docker is installed is called a **Docker Host**. This is the first important point to remember.
+
+On this Docker Host, the first major Docker concept is the **Image**. Kubernetes does not teach you what an image is; Docker does. If you attend a dedicated Docker training later, the key topics you should focus on are:
+
+* What is an image?
+* How to create an image?
+* Image structure
+* Image layers
+
+An image is nothing but a file. More specifically, it is a read-only binary file. It is a collection of libraries, binaries, and dependencies needed for your application to run.
+
+By default, an image is read-only. If you want to make changes, you don't edit the image directly. Instead, you create a new image.
+
+When this image is executed, or in Docker terminology, when the image is **run**, it produces a container.
+
+This is an important concept:
+
+**You never create a container directly. You run an image, and Docker gives you a container.**
+
+Therefore, we can confidently say:
+
+> A running instance of an image is called a container.
+
+An image contains all the libraries, binaries, and dependencies required for the application. When the image runs, Docker creates a container, which becomes the environment where your application executes.
+
+Conceptually:
+
+Image → Run → Container
+
+Docker is actually that simple.
+
+Now let's discuss the different types of images.
+
+Docker primarily gives us two types of images:
+
+1. Base Images
+2. Custom Images
+
+### Base Images
+
+Base images are ready-made images that are already available.
+
+Since Docker is widely used, Docker provides free images for many open-source technologies, such as:
+
+* Operating Systems (Ubuntu, CentOS, etc.)
+* Programming Languages (Python, Java, Node.js)
+* Databases (MySQL, PostgreSQL)
+* Web Servers (Apache, Nginx)
+* Monitoring Tools
+* DevOps Tools
+
+These images are already available and can be downloaded whenever needed.
+
+You may ask: Where are these images stored?
+
+Docker provides a public registry called **Docker Hub**.
+
+A registry is simply a location where container images are stored.
+
+Think of it this way:
+
+* GitHub stores source code.
+* Docker Hub stores container images.
+
+Docker Hub is a free public registry maintained by Docker.
+
+Other registries also exist, such as:
+
+* Docker Hub
+* Docker Trusted Registry
+* Amazon Elastic Container Registry (ECR)
+* Google Container Registry (GCR)
+* GitHub Container Registry
+* Kubernetes Registries
+
+A registry is simply a place where images are maintained.
+
+When we want to use a base image, we simply **pull** it from Docker Hub.
+
+Pull means download.
+
+Once the image is downloaded to our machine, we run it and obtain a container.
+
+For example:
+
+If the image is Ubuntu:
+
+* Pull Ubuntu Image
+* Run Ubuntu Image
+* Get Ubuntu Container
+
+If the image is MySQL:
+
+* Pull MySQL Image
+* Run MySQL Image
+* Get MySQL Container
+
+That is the difference between an image and a container.
+
+### Custom Images
+
+Custom images are images created by users like us.
+
+These are typically created when we want to package and deploy our own applications.
+
+Custom images are usually built on top of base images.
+
+For example:
+
+Suppose you want to deploy a Python application.
+
+You may start with the Python base image and then add:
+
+* Your application code
+* Configuration files
+* Additional libraries
+
+The resulting image becomes your custom image.
+
+Custom images can also be stored in registries such as Docker Hub, ECR, GCR, or private registries.
+
+### Creating Custom Images
+
+To create custom images, Docker uses something called a **Dockerfile**.
+
+This is one of the most important concepts in Docker.
+
+A Dockerfile contains instructions that define:
+
+* What software should be installed
+* Which files should be copied
+* Which commands should be executed
+* How the container should start
+
+As a Docker administrator, you spend a lot of time creating Dockerfiles.
+
+The Dockerfile is then built into an image.
+
+Notice the terminology:
+
+* Dockerfile is written
+* Image is built
+* Image is shipped
+* Image is run
+
+The famous Docker workflow is:
+
+**Build → Ship → Run**
+
+Build:
+
+* Create Dockerfile
+* Build Image
+
+Ship:
+
+* Push image to a registry such as Docker Hub
+
+Run:
+
+* Execute image to create a container
+
+This is the fundamental architecture of Docker.
+
+In Docker training, the Dockerfile is usually the most important topic because it teaches you how custom images are created.
+
+Now that we understand images, containers, Docker Hub, and Dockerfiles, we can move on to installing Docker and working with Docker commands.
+
+For demonstration purposes, I have already created a virtual machine in AWS using Ubuntu. While Docker can run on Windows, most production environments run Docker and Kubernetes on Linux-based operating systems.
+
+So for the remainder of the session, we'll work with an Ubuntu virtual machine and start exploring Docker practically.
+----------------------------------------------
 A container is a **lightweight, isolated process** created by a container runtime like Docker. It is not a virtual machine.
 
 A container has:
