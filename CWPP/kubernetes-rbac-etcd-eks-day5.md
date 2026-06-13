@@ -1,4 +1,4 @@
-# Kubernetes RBAC, Namespaces, Dashboard, ETCD Backup, EKS & Troubleshooting
+# Day-5 : Kubernetes RBAC, Namespaces, Dashboard, ETCD Backup, EKS & Troubleshooting
 
 > **Series:** Cloud Workload Protection — Day 5
 > **Topics:** Namespaces, Authentication (certificates + tokens), RBAC (Role, RoleBinding, ClusterRole, ClusterRoleBinding), Kubernetes Dashboard, ETCD Backup & Restore, EKS Cluster Setup, Cluster Troubleshooting
