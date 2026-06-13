@@ -1,12 +1,3 @@
----
-layout: post
-title: "CrowdStrike Falcon Windows and Mac Command Runbooks"
-date: 2026-06-13
-categories: [crowdstrike, falcon, windows, mac, edr]
-tags: [crowdstrike, falcon, windows, mac, cswindiag, falconctl, troubleshooting, runbook]
-description: "A practical Windows and Mac runbook for CrowdStrike Falcon installation validation troubleshooting logging and maintenance commands."
----
-
 # CrowdStrike Falcon Windows and Mac Command Runbooks
 
 This post collects practical CrowdStrike Falcon commands and host-side checks for Windows and Mac. It focuses on installation validation troubleshooting connectivity checks diagnostics and maintenance tasks.
