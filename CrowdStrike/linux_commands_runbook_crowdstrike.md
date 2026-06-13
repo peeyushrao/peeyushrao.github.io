@@ -1,12 +1,3 @@
----
-layout: post
-title: "CrowdStrike Falcon Linux Agent Commands Runbook"
-date: 2026-06-13
-categories: [crowdstrike, falcon, linux, edr]
-tags: [crowdstrike, falconctl, linux, sensor, troubleshooting, runbook]
-description: "A practical Linux runbook for CrowdStrike Falcon agent installation, validation, troubleshooting, and maintenance commands."
----
-
 # CrowdStrike Falcon Linux Agent Commands Runbook
 
 This post is a practical Linux command reference for CrowdStrike Falcon Sensor deployments on hosts. It covers installation, validation, troubleshooting, log collection, maintenance tasks, and useful `falconctl` queries that are handy during day-to-day support work.
