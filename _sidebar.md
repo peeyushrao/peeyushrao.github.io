@@ -16,7 +16,7 @@
 - **CWPP**
   - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Day-2 : Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
-  - [Kubernetes RBAC, Namespaces, Dashboard, ETCD Backup, EKS & Troubleshooting](CWPP/kubernetes-rbac-etcd-eks-day5.md)
+  - [Day-5 : Kubernetes RBAC, Namespaces, Dashboard, ETCD Backup, EKS & Troubleshooting](CWPP/kubernetes-rbac-etcd-eks-day5.md)
   - [Day 4: Kubernetes Scheduling, Storage, ConfigMaps, Secrets & StatefulSets](CWPP/kubernetes-scheduling-storage-day4.md)
   - [Day 3: Kubernetes Services, Deployments & Auto-Scaling](CWPP/kubernetes-services-deployment-scaling-day3.md)
   - [Kubernetes & Cloud Workload Security — An Introduction](CWPP/kubernetes_cloud_security_concepts.md)
