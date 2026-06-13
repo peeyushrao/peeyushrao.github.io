@@ -15,7 +15,7 @@
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
 - **CWPP**
-  - [Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
+  - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
   - [Kubernetes Scheduling, Storage, ConfigMaps, Secrets & StatefulSets](CWPP/kubernetes-scheduling-storage-day4.md)
   - [Kubernetes Services, Deployments & Auto-Scaling](CWPP/kubernetes-services-deployment-scaling-day3.md)
