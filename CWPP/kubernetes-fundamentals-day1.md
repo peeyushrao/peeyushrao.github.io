@@ -1,4 +1,4 @@
-# Docker & Containerization Fundamentals
+# Day-1 : Docker & Containerization Fundamentals
 
 > **Series:** Cloud Workload Protection — Day 1  
 > **Topics:** Physical servers → VMs → Containers, Docker core commands, container lifecycle, port mapping, Dockerfile authoring
