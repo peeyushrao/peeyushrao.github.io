@@ -1,4 +1,4 @@
-# Kubernetes Fundamentals — Architecture, Pods & Replica Sets
+# Day-2 : Kubernetes Fundamentals — Architecture, Pods & Replica Sets
 
 > **Series:** Cloud Workload Protection — Day 2  
 > **Topics:** Container orchestration concepts, Kubernetes architecture, cluster setup, Pods, multi-container Pods, troubleshooting, Replica Sets, scaling
