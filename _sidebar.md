@@ -7,7 +7,6 @@
   - [CrowdStrike Falcon EDR: How It Works and Why It's Different](CrowdStrike/2_crowdstrike-edr-deep-dive.md)
   - [CrowdStrike Falcon Admin Interview Questions — The Complete Guide](CrowdStrike/crowdstrike-falcon-admin-interview-questions.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
-  - [Kubernetes & Cloud Workload Security — A Complete Guide](CrowdStrike/kubernetes_cloud_security_concepts.md)
   - [CrowdStrike Falcon Linux Agent Commands Runbook](CrowdStrike/linux_commands_runbook_crowdstrike.md)
   - [CrowdStrike Falcon Windows and Mac Command Runbooks](CrowdStrike/windows_mac_commands_runbook_crowdstrike.md)
   - **CQL**
