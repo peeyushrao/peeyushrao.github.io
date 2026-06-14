@@ -1,4 +1,4 @@
-# Day 3: Kubernetes Services, Deployments & Auto-Scaling
+# Day-3 : Kubernetes Services, Deployments & Auto-Scaling
 
 > **Series:** Cloud Workload Protection — Day 3
 > **Topics:** Services (ClusterIP, NodePort, LoadBalancer, Ingress, ExternalName), Deployments, Rolling Updates, Rollback, Horizontal Pod Autoscaler (HPA), Vertical Pod Autoscaler (VPA)
