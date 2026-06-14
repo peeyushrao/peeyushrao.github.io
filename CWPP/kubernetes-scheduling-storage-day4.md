@@ -1,4 +1,4 @@
-# Day 4: Kubernetes Scheduling, Storage, ConfigMaps, Secrets & StatefulSets
+# Day-4 : Kubernetes Scheduling, Storage, ConfigMaps, Secrets & StatefulSets
 
 > **Series:** Cloud Workload Protection — Day 4
 > **Topics:** DaemonSet, Scheduling techniques (nodeName, nodeSelector, Node Affinity), Taints & Tolerations, Volumes, Persistent Volumes & Claims, StorageClass, ConfigMaps, Secrets, StatefulSets, Capstone: WordPress + MySQL
