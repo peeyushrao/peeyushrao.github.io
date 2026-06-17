@@ -78,7 +78,7 @@ This query combines:
 
 ---
 
-# Query 3 — Identify Which Falcon Admin Contained or Lifted a Host
+# Query 3 — Find out the the most active processes and directories that Falcon reads
 
 ```cql
 aid=HOST_ID #event_simpleName=/(ProcessRollup2|ProcessRollup2Stats)/
