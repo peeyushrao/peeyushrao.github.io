@@ -106,3 +106,34 @@ The above recommendation should be configured and tested with regard to the host
 Weight current performance with security concerns and decide what configuration is best for their environment.
 
 ---
+```
+#repo=sensor_metadata #data_source_name=aidmaster  aid =?aid  ComputerName = ?ComputerName
+| join({
+#repo=base_sensor #event_simpleName=SensorHeartbeat
+| groupby([aid], function=[selectLast([@timestamp])],limit=max)
+| rename(@timestamp, as=LastSeen)
+}, field=[aid], key=aid, mode=left, include=LastSeen)
+| TimeDelta := now() - LastSeen
+| test(TimeDelta > duration("1d"))| test(TimeDelta < duration("2d"))
+| groupBy([aid], function=selectLast([aid, ComputerName, event_platform, Version, MachineDomain, OU, SiteName, FirstSeen, LastSeen]))
+| FirstSeen:=formatTime(%FT%T%z, field=FirstSeen)
+| LastSeen:=formatTime(%FT%T%z, field=LastSeen)#repo=sensor_metadata #data_source_name=aidmaster  aid =?aid  ComputerName = ?ComputerName
+| join({
+#repo=base_sensor #event_simpleName=SensorHeartbeat
+| groupby([aid], function=[selectLast([@timestamp])],limit=max)
+| rename(@timestamp, as=LastSeen)
+}, field=[aid], key=aid, mode=left, include=LastSeen)
+| TimeDelta := now() - LastSeen
+| test(TimeDelta > duration("1d"))| test(TimeDelta < duration("2d"))
+| groupBy([aid], function=selectLast([aid, ComputerName, event_platform, Version, MachineDomain, OU, SiteName, FirstSeen, LastSeen]))
+| FirstSeen:=formatTime(%FT%T%z, field=FirstSeen)
+| LastSeen:=formatTime(%FT%T%z, field=LastSeen)
+```
+---
+```
+#repo=detections #event_simpleName=Event_EppDetectionSummaryEvent
+| in(field=#repo.cid, values=[cid1, cid2, cid3])
+| Technique="Indicator of Attack" Tactic="Custom Intelligence"
+| groupBy([CommandLine], function=[collect(FileName), count(Hostname, distinct=true)], limit=max)
+```
+---
