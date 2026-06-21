@@ -1,11 +1,4 @@
-# CrowdStrike Next-Gen SIEM – AI-Powered IOA Detection Reporting
-
-*A Field Learning Blog — From Falcon Console to LogScale Query*
-
-**Author:** Peeyush Kumar Rao
-**Platform:** CrowdStrike Falcon Next-Gen SIEM (LogScale)
-**Date:** June 2026
-
+# CrowdStrike Next-Gen SIEM – "AI Powered IOA" Detection Reporting
 ---
 
 # Problem Statement
@@ -140,23 +133,6 @@ Result:
 ```
 AI Powered IOA
 ```
-
-### Important Observation
-
-LogScale uses:
-
-```
-AI Powered IOA
-```
-
-FalconPy API uses:
-
-```
-AI-Powered IOA
-```
-
-The strings are different.
-
 ---
 
 # Final Working Query
@@ -242,7 +218,7 @@ Last 24 Hours
 Save as:
 
 ```
-AI-IOA Daily Report
+AI IOA Daily Report
 ```
 
 ---
