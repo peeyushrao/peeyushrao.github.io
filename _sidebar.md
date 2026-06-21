@@ -12,6 +12,7 @@
   - **CQL**
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
+    - [CrowdStrike Next-Gen SIEM – AI-Powered IOA Detection Reporting](CrowdStrike/CQL/endpoint-detections-reporting.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
 - **CWPP**
   - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
