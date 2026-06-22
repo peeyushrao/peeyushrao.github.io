@@ -327,6 +327,8 @@ Detections: Read
 | match(file="falcon/investigate/detect_patterns.csv", field=[PatternId])
 | show_in_ui="True"
 | Tactic="AI Powered IOA"
+| IOCSource="Anomalous process execution"
+| IOCType="Compounded behavioral activity"
 | table([
 aid,
 ComputerName,
