@@ -107,7 +107,7 @@ Weight current performance with security concerns and decide what configuration 
 
 ---
 
-### Query 4 — First seen and last heartbeat
+# Query 4 — First seen and last heartbeat
 
 ## Option A (recommended): one query with two “OR” filters
 ```
@@ -147,6 +147,8 @@ This version creates two inputs (?aid, ?ComputerName) and will match either one:
 | table([aid, ComputerName, event_platform, Version, MachineDomain, OU, SiteName, FirstSeen, LastHeartbeat])
 ```
 ---
+---
+# Query 5 — Detections genereted by IOA which we have created Tactic - Custom Intelligence 
 ```
 #repo=detections #event_simpleName=Event_EppDetectionSummaryEvent
 | in(field=#repo.cid, values=[cid1, cid2, cid3])
