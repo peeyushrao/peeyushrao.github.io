@@ -15,7 +15,7 @@
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
     - [CrowdStrike Next-Gen SIEM – "AI Powered IOA" Detection Reporting](CrowdStrike/CQL/endpoint-detections-reporting.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
-    - [1 - Host Count per OS](CrowdStrike/CQL/query-collection.md)
+    - [Query Collection](CrowdStrike/CQL/query-collection.md)
 - **CWPP**
   - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Day-2 : Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
