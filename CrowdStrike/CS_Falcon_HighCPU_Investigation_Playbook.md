@@ -106,7 +106,7 @@ With 70+ active print jobs constantly creating temporary files, these triggers w
 
 ### Step A1 — Extract the Bundle
 
-The `[.7z](https://github.com/peeyushrao/peeyushrao.github.io/blob/main/Arsenal/Downloads/extract.zip)` contains nested archives. The structure is not predictable — always list before extracting.
+The `[.7z](https://github.com/peeyushrao/peeyushrao.github.io/blob/main/Arsenal/Downloads/extract.zip)' contains nested archives. The structure is not predictable — always list before extracting.
 
 ```bash
 # See what is inside first
