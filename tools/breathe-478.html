@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-7-8 · a breath ritual</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg-top:#0d1a16;
+    --bg-bot:#0a1310;
+    --surface: rgba(255,255,255,0.035);
+    --surface-border: rgba(255,255,255,0.08);
+    --text: #EAE7DE;
+    --text-muted: #8FA39A;
+    --warmup: #6E8B99;
+    --inhale: #7FB8A3;
+    --hold: #545F5A;
+    --exhale: #D9A574;
+    --ring-track: rgba(255,255,255,0.09);
+    --focus: #D9A574;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; height:100%; }
+  body{
+    min-height:100vh;
+    background: radial-gradient(120% 120% at 50% -10%, #16281f 0%, var(--bg-top) 35%, var(--bg-bot) 100%);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+    overflow-x:hidden;
+  }
+
+  .app{
+    width:100%;
+    max-width:460px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:28px;
+  }
+
+  header{ text-align:center; }
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+    margin:0 0 6px;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(28px,7vw,36px);
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .subtitle{
+    color:var(--text-muted);
+    font-size:13px;
+    margin:8px 0 0;
+  }
+
+  /* ---------- Orb stage ---------- */
+  .orb-stage{
+    position:relative;
+    width:min(78vw, 300px);
+    height:min(78vw, 300px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .progress-ring{
+    position:absolute;
+    inset:0;
+    transform:rotate(-90deg);
+  }
+  .progress-ring circle{
+    fill:none;
+    stroke-width:2;
+  }
+  .ring-track{ stroke:var(--ring-track); }
+  .ring-progress{
+    stroke: var(--warmup);
+    stroke-linecap:round;
+    transition: stroke 0.6s ease;
+  }
+
+  .orb-wrapper{
+    width:62%;
+    height:62%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    will-change:transform;
+  }
+  .orb-core{
+    width:100%;
+    height:100%;
+    border-radius:42% 58% 65% 35% / 45% 40% 60% 55%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.22), rgba(255,255,255,0) 45%),
+                radial-gradient(circle at 60% 65%, var(--warmup), color-mix(in srgb, var(--warmup) 60%, black) 75%);
+    box-shadow: 0 0 60px 6px color-mix(in srgb, var(--warmup) 45%, transparent);
+    animation: wobble 9s ease-in-out infinite;
+    transition: background 1.1s ease, box-shadow 1.1s ease;
+  }
+  .orb-core.phase-inhale{
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.25), rgba(255,255,255,0) 45%),
+                radial-gradient(circle at 60% 65%, var(--inhale), color-mix(in srgb, var(--inhale) 60%, black) 75%);
+    box-shadow: 0 0 70px 8px color-mix(in srgb, var(--inhale) 50%, transparent);
+  }
+  .orb-core.phase-hold{
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.12), rgba(255,255,255,0) 45%),
+                radial-gradient(circle at 60% 65%, var(--hold), color-mix(in srgb, var(--hold) 60%, black) 75%);
+    box-shadow: 0 0 40px 4px color-mix(in srgb, var(--hold) 40%, transparent);
+  }
+  .orb-core.phase-exhale{
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.2), rgba(255,255,255,0) 45%),
+                radial-gradient(circle at 60% 65%, var(--exhale), color-mix(in srgb, var(--exhale) 60%, black) 75%);
+    box-shadow: 0 0 70px 8px color-mix(in srgb, var(--exhale) 45%, transparent);
+  }
+
+  @keyframes wobble{
+    0%,100%{ border-radius:42% 58% 65% 35% / 45% 40% 60% 55%; }
+    33%{ border-radius:58% 42% 40% 60% / 55% 60% 40% 45%; }
+    66%{ border-radius:48% 52% 55% 45% / 40% 55% 45% 60%; }
+  }
+
+  .readout{
+    position:absolute;
+    text-align:center;
+    pointer-events:none;
+  }
+  .count{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-size:56px;
+    line-height:1;
+  }
+  .phase-label{
+    margin-top:4px;
+    font-size:13px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--text-muted);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls{
+    display:flex;
+    gap:10px;
+  }
+  button{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    border-radius:999px;
+    border:1px solid var(--surface-border);
+    padding:11px 20px;
+    background:var(--surface);
+    color:var(--text);
+    cursor:pointer;
+    transition: background 0.2s ease, transform 0.15s ease, opacity 0.2s ease;
+  }
+  button:hover:not(:disabled){ background:rgba(255,255,255,0.07); }
+  button:active:not(:disabled){ transform:scale(0.97); }
+  button:disabled{ opacity:0.35; cursor:not-allowed; }
+  button.primary{
+    background: color-mix(in srgb, var(--exhale) 85%, black);
+    border-color: transparent;
+  }
+  button.primary:hover:not(:disabled){
+    background: var(--exhale);
+  }
+  button:focus-visible{
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Settings ---------- */
+  .settings{
+    width:100%;
+    background:var(--surface);
+    border:1px solid var(--surface-border);
+    border-radius:16px;
+    padding:16px 18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .setting-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .setting-row label{
+    font-size:13px;
+    color:var(--text-muted);
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+    flex:1;
+  }
+  .setting-row .value{
+    font-size:13px;
+    color:var(--text);
+    font-weight:600;
+    min-width:38px;
+    text-align:right;
+  }
+  input[type=range]{
+    -webkit-appearance:none;
+    width:100%;
+    height:4px;
+    border-radius:2px;
+    background: var(--surface-border);
+    margin-top:6px;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:16px; height:16px;
+    border-radius:50%;
+    background: var(--exhale);
+    cursor:pointer;
+    box-shadow:0 0 0 4px rgba(217,165,116,0.15);
+  }
+  input[type=range]:focus-visible{ outline:2px solid var(--focus); outline-offset:4px; }
+
+  .toggle{
+    position:relative;
+    width:42px; height:24px;
+    flex:none;
+  }
+  .toggle input{ position:absolute; inset:0; opacity:0; cursor:pointer; margin:0; }
+  .toggle .track{
+    position:absolute; inset:0;
+    background: var(--surface-border);
+    border-radius:999px;
+    transition: background 0.2s ease;
+  }
+  .toggle .thumb{
+    position:absolute; top:3px; left:3px;
+    width:18px; height:18px;
+    border-radius:50%;
+    background: var(--text-muted);
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .toggle input:checked + .track{ background: color-mix(in srgb, var(--inhale) 55%, transparent); }
+  .toggle input:checked + .track + .thumb{ transform:translateX(18px); background: var(--inhale); }
+  .toggle input:focus-visible + .track{ outline:2px solid var(--focus); outline-offset:2px; }
+
+  /* ---------- Stats ---------- */
+  .stats{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+  }
+  .stat{
+    background:var(--surface);
+    border:1px solid var(--surface-border);
+    border-radius:14px;
+    padding:14px 8px;
+    text-align:center;
+  }
+  .stat .num{
+    font-family:'Fraunces', serif;
+    font-size:26px;
+    display:block;
+  }
+  .stat .lbl{
+    font-size:11px;
+    color:var(--text-muted);
+    letter-spacing:0.04em;
+    margin-top:2px;
+    display:block;
+  }
+
+  .reset-stats{
+    background:none;
+    border:none;
+    color:var(--text-muted);
+    font-size:12px;
+    text-decoration:underline;
+    padding:4px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .orb-core{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <header>
+    <p class="eyebrow">A quiet ritual</p>
+    <h1>4–7–8 breathing</h1>
+    <p class="subtitle">Inhale four · hold seven · exhale eight</p>
+  </header>
+
+  <div class="orb-stage">
+    <svg class="progress-ring" viewBox="0 0 200 200">
+      <circle class="ring-track" cx="100" cy="100" r="92"></circle>
+      <circle id="ringProgress" class="ring-progress" cx="100" cy="100" r="92"
+              stroke-dasharray="578" stroke-dashoffset="0"></circle>
+    </svg>
+    <div class="orb-wrapper" id="orbWrapper">
+      <div class="orb-core" id="orbCore"></div>
+    </div>
+    <div class="readout">
+      <div class="count" id="countDisplay">60</div>
+      <div class="phase-label" id="phaseLabel">Ready</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="startBtn">Begin</button>
+    <button id="pauseBtn" disabled>Pause</button>
+    <button id="resetBtn" disabled>End session</button>
+  </div>
+
+  <div class="settings">
+    <div class="setting-row">
+      <label for="warmupRange">Warm-up
+        <input type="range" id="warmupRange" min="0" max="180" step="5" value="60">
+      </label>
+      <span class="value" id="warmupVal">60s</span>
+    </div>
+    <div class="setting-row">
+      <label for="soundToggle">Sound<br><span style="font-size:11px;">forest ambience · breath tones</span></label>
+      <div class="toggle">
+        <input type="checkbox" id="soundToggle" checked>
+        <div class="track"></div>
+        <div class="thumb"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span class="num" id="cyclesToday">–</span><span class="lbl">cycles today</span></div>
+    <div class="stat"><span class="num" id="totalCycles">–</span><span class="lbl">lifetime cycles</span></div>
+    <div class="stat"><span class="num" id="daysUsed">–</span><span class="lbl">days practiced</span></div>
+  </div>
+
+  <div style="display:flex; gap:16px; align-items:center;">
+    <button class="reset-stats" id="exportStatsBtn">Backup history</button>
+    <button class="reset-stats" id="importStatsBtn">Restore backup</button>
+    <button class="reset-stats" id="resetStatsBtn">Clear practice history</button>
+  </div>
+  <textarea id="importArea" placeholder="Paste backup JSON here, then click Restore backup again"
+    style="display:none; width:100%; min-height:70px; background:var(--surface); color:var(--text);
+    border:1px solid var(--surface-border); border-radius:10px; padding:10px; font-size:12px;
+    font-family:monospace;"></textarea>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---------------- Constants ----------------
+  var DURATIONS = { inhale: 4000, hold: 7000, exhale: 8000 };
+  var LABELS = { warmup:"Settle in", inhale:"Breathe in", hold:"Hold", exhale:"Breathe out" };
+  var CIRC = 2 * Math.PI * 92; // ~578
+
+  // ---------------- DOM ----------------
+  var els = {
+    start: document.getElementById('startBtn'),
+    pause: document.getElementById('pauseBtn'),
+    reset: document.getElementById('resetBtn'),
+    warmupRange: document.getElementById('warmupRange'),
+    warmupVal: document.getElementById('warmupVal'),
+    soundToggle: document.getElementById('soundToggle'),
+    count: document.getElementById('countDisplay'),
+    label: document.getElementById('phaseLabel'),
+    orbWrapper: document.getElementById('orbWrapper'),
+    orbCore: document.getElementById('orbCore'),
+    ring: document.getElementById('ringProgress'),
+    cyclesToday: document.getElementById('cyclesToday'),
+    totalCycles: document.getElementById('totalCycles'),
+    daysUsed: document.getElementById('daysUsed'),
+    resetStatsBtn: document.getElementById('resetStatsBtn')
+  };
+
+  // ---------------- Audio ----------------
+  var audioCtx = null;
+  var ambience = null; // {source, gain}
+  var chirpTimer = null;
+  var soundOn = true;
+
+  function ensureAudio(){
+    if(!audioCtx){
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      audioCtx = new Ctx();
+    }
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function makeNoiseBuffer(seconds){
+    var len = Math.floor(audioCtx.sampleRate * seconds);
+    var buffer = audioCtx.createBuffer(1, len, audioCtx.sampleRate);
+    var data = buffer.getChannelData(0);
+    var last = 0;
+    for(var i=0;i<len;i++){
+      var white = Math.random()*2-1;
+      last = (last + 0.02*white) / 1.02;
+      data[i] = last * 3.2;
+    }
+    return buffer;
+  }
+
+  function startAmbience(){
+    if(!soundOn) return;
+    ensureAudio();
+    if(ambience) return;
+    var source = audioCtx.createBufferSource();
+    source.buffer = makeNoiseBuffer(6);
+    source.loop = true;
+    var filter = audioCtx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.value = 480;
+    filter.Q.value = 0.6;
+    var gain = audioCtx.createGain();
+    gain.gain.value = 0;
+    source.connect(filter).connect(gain).connect(audioCtx.destination);
+    source.start();
+    ambience = { source: source, gain: gain };
+    var now = audioCtx.currentTime;
+    gain.gain.linearRampToValueAtTime(0.16, now + 1.5);
+    scheduleChirp();
+  }
+
+  function stopAmbience(fadeSec){
+    if(!ambience) return;
+    fadeSec = fadeSec == null ? 1.0 : fadeSec;
+    var g = ambience.gain, src = ambience.source;
+    var now = audioCtx.currentTime;
+    g.gain.cancelScheduledValues(now);
+    g.gain.setValueAtTime(g.gain.value, now);
+    g.gain.linearRampToValueAtTime(0, now + fadeSec);
+    (function(s){ setTimeout(function(){ try{ s.stop(); }catch(e){} }, (fadeSec*1000)+150); })(src);
+    ambience = null;
+    if(chirpTimer){ clearTimeout(chirpTimer); chirpTimer = null; }
+  }
+
+  function scheduleChirp(){
+    var wait = 2200 + Math.random()*5000;
+    chirpTimer = setTimeout(function(){
+      if(ambience && soundOn) playChirp();
+      if(ambience) scheduleChirp();
+    }, wait);
+  }
+
+  function playChirp(){
+    var now = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var g = audioCtx.createGain();
+    osc.type = 'sine';
+    var base = 1700 + Math.random()*1300;
+    osc.frequency.setValueAtTime(base, now);
+    osc.frequency.exponentialRampToValueAtTime(base*0.55, now+0.14);
+    g.gain.setValueAtTime(0, now);
+    g.gain.linearRampToValueAtTime(0.045, now+0.02);
+    g.gain.linearRampToValueAtTime(0, now+0.2);
+    osc.connect(g).connect(audioCtx.destination);
+    osc.start(now); osc.stop(now+0.22);
+  }
+
+  function playPhaseTone(type, durationSec){
+    if(!soundOn) return;
+    ensureAudio();
+    var now = audioCtx.currentTime;
+    var chordUp = [261.63, 329.63, 392.00];
+    var chordDown = [392.00, 329.63, 261.63];
+    var freqs = type === 'inhale' ? chordUp : chordDown;
+    var master = audioCtx.createGain();
+    master.gain.setValueAtTime(0, now);
+    master.connect(audioCtx.destination);
+    var attack = Math.min(0.9, durationSec*0.2);
+    var release = Math.min(1.4, durationSec*0.25);
+    master.gain.linearRampToValueAtTime(0.085, now+attack);
+    master.gain.setValueAtTime(0.085, now + durationSec - release);
+    master.gain.linearRampToValueAtTime(0, now + durationSec);
+
+    freqs.forEach(function(f, i){
+      var osc = audioCtx.createOscillator();
+      osc.type = 'sine';
+      var startF = type === 'inhale' ? f*0.94 : f*1.06;
+      osc.frequency.setValueAtTime(startF, now);
+      osc.frequency.linearRampToValueAtTime(f, now + durationSec);
+      var g = audioCtx.createGain();
+      g.gain.value = 1/(i+1.4);
+      osc.connect(g).connect(master);
+      osc.start(now);
+      osc.stop(now + durationSec + 0.05);
+    });
+  }
+
+  // ---------------- State machine ----------------
+  var phase = 'idle';
+  var phaseDuration = 0;
+  var phaseStart = 0;
+  var isPaused = false;
+  var pauseStartedAt = 0;
+  var rafId = null;
+  var warmupSeconds = 60;
+
+  function warmupMs(){ return warmupSeconds * 1000; }
+
+  function setOrbPhaseClass(name){
+    els.orbCore.classList.remove('phase-inhale','phase-hold','phase-exhale');
+    if(name === 'inhale') els.orbCore.classList.add('phase-inhale');
+    else if(name === 'hold') els.orbCore.classList.add('phase-hold');
+    else if(name === 'exhale') els.orbCore.classList.add('phase-exhale');
+  }
+
+  function ringColorVar(name){
+    if(name==='inhale') return 'var(--inhale)';
+    if(name==='hold') return 'var(--hold)';
+    if(name==='exhale') return 'var(--exhale)';
+    return 'var(--warmup)';
+  }
+
+  function goToPhase(name){
+    phase = name;
+    phaseStart = performance.now();
+    els.label.textContent = LABELS[name] || '';
+    els.ring.style.stroke = ringColorVar(name);
+    setOrbPhaseClass(name);
+
+    if(name === 'warmup'){
+      phaseDuration = warmupMs();
+      if(phaseDuration <= 0){ goToPhase('inhale'); return; }
+      startAmbience();
+    } else if(name === 'inhale'){
+      phaseDuration = DURATIONS.inhale;
+      playPhaseTone('inhale', DURATIONS.inhale/1000);
+    } else if(name === 'hold'){
+      phaseDuration = DURATIONS.hold;
+    } else if(name === 'exhale'){
+      phaseDuration = DURATIONS.exhale;
+      playPhaseTone('exhale', DURATIONS.exhale/1000);
+    }
+  }
+
+  function advancePhase(){
+    if(phase === 'warmup'){
+      stopAmbience(0.8);
+      goToPhase('inhale');
+    } else if(phase === 'inhale'){
+      goToPhase('hold');
+    } else if(phase === 'hold'){
+      goToPhase('exhale');
+    } else if(phase === 'exhale'){
+      recordCycle();
+      goToPhase('inhale');
+    }
+  }
+
+  function updateVisuals(elapsed){
+    var remaining = Math.max(0, phaseDuration - elapsed);
+    var secs = Math.ceil(remaining/1000);
+    if(phase === 'warmup'){
+      var m = Math.floor(secs/60), s = secs%60;
+      els.count.textContent = m > 0 ? (m + ':' + (s<10?'0':'') + s) : String(s);
+    } else {
+      els.count.textContent = String(Math.max(secs,0));
+    }
+
+    var progress = phaseDuration > 0 ? Math.min(1, elapsed/phaseDuration) : 0;
+    els.ring.setAttribute('stroke-dashoffset', String(CIRC * progress));
+
+    var scale = 1;
+    if(phase === 'inhale') scale = 1 + 0.26*progress;
+    else if(phase === 'hold') scale = 1.26;
+    else if(phase === 'exhale') scale = 1.26 - 0.26*progress;
+    else scale = 1;
+    els.orbWrapper.style.transform = 'scale(' + scale.toFixed(3) + ')';
+  }
+
+  function tick(now){
+    if(!isPaused){
+      var elapsed = now - phaseStart;
+      updateVisuals(elapsed);
+      if(elapsed >= phaseDuration) advancePhase();
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+
+  // ---------------- Session controls ----------------
+  var running = false;
+
+  function startSession(){
+    ensureAudio();
+    running = true;
+    isPaused = false;
+    els.start.disabled = true;
+    els.pause.disabled = false;
+    els.reset.disabled = false;
+    els.warmupRange.disabled = true;
+    goToPhase('warmup');
+    if(!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  function togglePause(){
+    if(!running) return;
+    if(!isPaused){
+      isPaused = true;
+      pauseStartedAt = performance.now();
+      if(audioCtx) audioCtx.suspend();
+      els.pause.textContent = 'Resume';
+    } else {
+      var pausedFor = performance.now() - pauseStartedAt;
+      phaseStart += pausedFor;
+      isPaused = false;
+      if(audioCtx) audioCtx.resume();
+      els.pause.textContent = 'Pause';
+    }
+  }
+
+  function endSession(){
+    running = false;
+    isPaused = false;
+    if(rafId){ cancelAnimationFrame(rafId); rafId = null; }
+    stopAmbience(0.4);
+    if(audioCtx){ audioCtx.close(); audioCtx = null; }
+    phase = 'idle';
+    els.label.textContent = 'Ready';
+    els.count.textContent = String(warmupSeconds);
+    els.ring.setAttribute('stroke-dashoffset', '0');
+    els.ring.style.stroke = 'var(--warmup)';
+    setOrbPhaseClass('idle');
+    els.orbWrapper.style.transform = 'scale(1)';
+    els.start.disabled = false;
+    els.pause.disabled = true;
+    els.pause.textContent = 'Pause';
+    els.reset.disabled = true;
+    els.warmupRange.disabled = false;
+  }
+
+  // ---------------- Stats persistence ----------------
+  var STATS_KEY = 'breathing-478-stats-v1';
+  var stats = { byDate: {}, totalCycles: 0 };
+
+  function todayStr(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+
+  function renderStats(){
+    var t = todayStr();
+    els.cyclesToday.textContent = stats.byDate[t] || 0;
+    els.totalCycles.textContent = stats.totalCycles || 0;
+    els.daysUsed.textContent = Object.keys(stats.byDate).length;
+  }
+
+  function loadStats(){
+    try{
+      var raw = localStorage.getItem(STATS_KEY);
+      if(raw) stats = JSON.parse(raw);
+    }catch(e){
+      // no stats saved yet, or storage unavailable (e.g. private browsing)
+    }
+    renderStats();
+  }
+
+  function saveStats(){
+    try{
+      localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+    }catch(e){
+      console.error('Could not save practice history', e);
+    }
+  }
+
+  function recordCycle(){
+    var t = todayStr();
+    stats.byDate[t] = (stats.byDate[t] || 0) + 1;
+    stats.totalCycles = (stats.totalCycles || 0) + 1;
+    renderStats();
+    saveStats();
+  }
+
+  var clearArmed = false;
+  els.resetStatsBtn.addEventListener('click', function(){
+    if(!clearArmed){
+      clearArmed = true;
+      els.resetStatsBtn.textContent = 'Click again to confirm';
+      setTimeout(function(){
+        clearArmed = false;
+        els.resetStatsBtn.textContent = 'Clear practice history';
+      }, 3000);
+    } else {
+      stats = { byDate:{}, totalCycles:0 };
+      renderStats();
+      saveStats();
+      clearArmed = false;
+      els.resetStatsBtn.textContent = 'Clear practice history';
+    }
+  });
+
+  var importArea = document.getElementById('importArea');
+  var importBtn = document.getElementById('importStatsBtn');
+  var importArmed = false;
+
+  document.getElementById('exportStatsBtn').addEventListener('click', function(){
+    var json = JSON.stringify(stats);
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(json).then(function(){
+        var btn = document.getElementById('exportStatsBtn');
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function(){ btn.textContent = original; }, 1800);
+      }).catch(function(){
+        importArea.style.display = 'block';
+        importArea.value = json;
+        importArea.select();
+      });
+    } else {
+      importArea.style.display = 'block';
+      importArea.value = json;
+      importArea.select();
+    }
+  });
+
+  importBtn.addEventListener('click', function(){
+    if(!importArmed){
+      importArmed = true;
+      importArea.style.display = 'block';
+      importArea.value = '';
+      importArea.focus();
+      importBtn.textContent = 'Click again to load pasted backup';
+    } else {
+      try{
+        var parsed = JSON.parse(importArea.value);
+        if(parsed && typeof parsed === 'object' && parsed.byDate){
+          stats = parsed;
+          renderStats();
+          saveStats();
+          importArea.style.display = 'none';
+          importBtn.textContent = 'Restore backup';
+          importArmed = false;
+        } else {
+          alert('That does not look like a valid backup.');
+        }
+      }catch(e){
+        alert('Could not read that backup. Make sure you pasted the full text.');
+      }
+    }
+  });
+
+  // ---------------- Wire up UI ----------------
+  els.warmupRange.addEventListener('input', function(){
+    warmupSeconds = parseInt(els.warmupRange.value, 10);
+    els.warmupVal.textContent = warmupSeconds + 's';
+    if(!running) els.count.textContent = String(warmupSeconds);
+  });
+
+  els.soundToggle.addEventListener('change', function(){
+    soundOn = els.soundToggle.checked;
+    if(!soundOn && ambience) stopAmbience(0.3);
+  });
+
+  els.start.addEventListener('click', startSession);
+  els.pause.addEventListener('click', togglePause);
+  els.reset.addEventListener('click', endSession);
+
+  // ---------------- Init ----------------
+  els.count.textContent = String(warmupSeconds);
+  els.ring.style.stroke = 'var(--warmup)';
+  loadStats();
+
+})();
+</script>
+
+</body>
+</html>
