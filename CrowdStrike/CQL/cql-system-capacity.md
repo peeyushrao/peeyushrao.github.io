@@ -79,5 +79,6 @@ aid=myaid
 | table([Timestamp, AvgCPU, MaxCPU, AvgRAM_GB, MaxRAM_GB, PercentDiskAvailable], limit=20000)
 | sort(_bucket, order=desc)
 ```
+![AES Diagram](/images/aes1.png)
 
 Notice in your screenshot: PercentDiskAvailable is null across all rows now, even though CPU/RAM populated. That's because AvailableDiskSpace/UsedDiskSpace come only from SystemCapacity events, while AverageCpuUsage/MaxCpuUsage come from ResourceUtilization events — and your filter AvgCPU=* OR MaxRAM_MB=* is letting through buckets that have CPU/RAM data but no disk data in that same 15-minute window. That's expected behavior given how sparse the disk-capacity events are (often just once every several hours), not a bug — but if you want disk % filled in more consistently, you'd want a wider bucket span (e.g. 1h or 4h) so more event types land in the same window.
