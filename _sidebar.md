@@ -15,6 +15,7 @@
   - **CQL**
     - [CrowdStrike LogScale Queries – Agent Upgrade History](CrowdStrike/CQL/Agent-update.md)
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
+    - [CrowdStrike Falcon LogScale (LQL) Hunting Query Samples](CrowdStrike/CQL/CrowdStrike-LQL-Hunting-Query-Samples.md)
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
     - [CrowdStrike Next-Gen SIEM – "AI Powered IOA" Detection Reporting](CrowdStrike/CQL/endpoint-detections-reporting.md)
     - [CrowdStrike Multipurpose Queries](CrowdStrike/CQL/multipurpose_queries_reference.md)
