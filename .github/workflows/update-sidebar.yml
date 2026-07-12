@@ -30,7 +30,7 @@ jobs:
             ("CrowdStrike",  "CrowdStrike"),
             ("CWPP",         "CWPP"),
             ("IR",           "IR"),
-            ("Interview-QA", "Interview Q&A"),
+            ("Interview-QA", "Core Concepts"),
             ("Linux",        "Linux"),
             ("Windows",      "Windows"),
             ("Zscaler",      "Zscaler"),       
