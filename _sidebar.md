@@ -29,7 +29,7 @@
   - [Kubernetes & Cloud Workload Security — An Introduction](CWPP/kubernetes_cloud_security_concepts.md)
 - **IR**
   - [Basics](IR/basics.md)
-- **Interview Q&A**
+- **Core Concepts**
   - [What is the primary mission of a Security Operations Center (SOC)?](Interview-QA/1.md)
   - [What is the difference between an alert, a detection, and an incident?](Interview-QA/2.md)
   - [Why is context more important than severity alone?](Interview-QA/3.md)
