@@ -1,4 +1,4 @@
-# Technical Notes and Cybersecurity Interview Preparation
+# Technical Notes and Cybersecurity Core Concepts
 
 Select a topic from the sidebar.
 
