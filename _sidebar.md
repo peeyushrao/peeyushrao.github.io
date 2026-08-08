@@ -13,6 +13,9 @@
   - [CrowdStrike Falcon Linux Agent Commands Runbook](CrowdStrike/linux_commands_runbook_crowdstrike.md)
   - [CrowdStrike Falcon Windows and Mac Command Runbooks](CrowdStrike/windows_mac_commands_runbook_crowdstrike.md)
   - **CQL**
+    - [How to Build CQL Queries: Discovery-First Methodology](CrowdStrike/CQL/01-how-to-build-cql-queries.md)
+    - [Security-Focused CQL: Threat Hunting, Detection Engineering, and IR Queries](CrowdStrike/CQL/02-security-cql-queries.md)
+    - [General-Purpose CQL: Fleet Inventory, Upgrades, and Capacity Queries](CrowdStrike/CQL/03-general-purpose-cql-queries.md)
     - [CrowdStrike LogScale Queries – Agent Upgrade History](CrowdStrike/CQL/Agent-update.md)
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
     - [CrowdStrike Falcon LogScale (LQL) Hunting Query Samples](CrowdStrike/CQL/CrowdStrike-LQL-Hunting-Query-Samples.md)
