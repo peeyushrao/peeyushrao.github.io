@@ -20,7 +20,6 @@
     - [CQL Query  - Resource Utilization](CrowdStrike/CQL/cql-system-capacity.md)
     - [CrowdStrike Falcon LogScale (LQL) Hunting Query Samples](CrowdStrike/CQL/CrowdStrike-LQL-Hunting-Query-Samples.md)
     - [CrowdStrike LogScale Query Deep Dive](CrowdStrike/CQL/CrowdStrike_LogScale_Query_Deep_Dive.md)
-    - [CrowdStrike Next-Gen SIEM – "AI Powered IOA" Detection Reporting](CrowdStrike/CQL/endpoint-detections-reporting.md)
 - **CWPP**
   - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Day-2 : Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
