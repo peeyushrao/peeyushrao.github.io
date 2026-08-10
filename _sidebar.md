@@ -11,7 +11,6 @@
   - [CrowdStrike Falcon — High CPU Investigation Playbook](CrowdStrike/CS_Falcon_HighCPU_Investigation_Playbook.md)
   - [Cybersecurity Study Resources](CrowdStrike/cybersecurity_study_resources.md)
   - [CrowdStrike Falcon Linux Agent Commands Runbook](CrowdStrike/linux_commands_runbook_crowdstrike.md)
-  - [CrowdStrike Falcon Windows and Mac Command Runbooks](CrowdStrike/windows_mac_commands_runbook_crowdstrike.md)
   - **CQL**
     - [How to Build CQL Queries: Discovery-First Methodology](CrowdStrike/CQL/01-how-to-build-cql-queries.md)
     - [Security-Focused CQL: Threat Hunting, Detection Engineering, and IR Queries](CrowdStrike/CQL/02-security-cql-queries.md)
