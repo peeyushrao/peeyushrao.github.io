@@ -17,8 +17,8 @@
     - [How to Build CQL Queries: Discovery-First Methodology](CrowdStrike/CQL/01-how-to-build-cql-queries.md)
     - [Security-Focused CQL: Threat Hunting, Detection Engineering, and IR Queries](CrowdStrike/CQL/02-security-cql-queries.md)
     - [General-Purpose CQL: Fleet Inventory, Upgrades, and Capacity Queries](CrowdStrike/CQL/03-general-purpose-cql-queries.md)
-    - [Falcon Playbook: Find Any Software, Extract Its Directories, Build an SVE](CrowdStrike/CQL/4-falcon-software-discovery-to-sve-playbook.md)
-    - [Finding SentinelOne on Your Fleet with CrowdStrike Falcon (and Turning It into an SVE)](CrowdStrike/CQL/5-finding-sentinelone-with-crowdstrike-falcon-sve.md)
+    - [Falcon Playbook: Find Any Software, Extract Its Directories, Build an SVE](CrowdStrike/CQL/04-falcon-software-discovery-to-sve-playbook.md)
+    - [Finding SentinelOne on Your Fleet with CrowdStrike Falcon (and Turning It into an SVE)](CrowdStrike/CQL/05-finding-sentinelone-with-crowdstrike-falcon-sve.md)
 - **CWPP**
   - [Day-1 : Docker & Containerization Fundamentals](CWPP/kubernetes-fundamentals-day1.md)
   - [Day-2 : Kubernetes Fundamentals — Architecture, Pods & Replica Sets](CWPP/kubernetes-fundamentals-day2.md)
