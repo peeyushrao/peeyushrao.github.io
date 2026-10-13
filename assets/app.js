@@ -21,11 +21,11 @@ function filter() {
   let count = 0;
   const query = search.value.trim().toLowerCase();
   cards.forEach(card => {
-    const visible = (!selected || card.dataset.folder === selected) && card.dataset.search.includes(query);
+    const visible = (!selected || card.dataset.folder === selected || card.dataset.folder.startsWith(selected + '/')) && card.dataset.search.includes(query);
     card.hidden = !visible;
     if (visible) count++;
   });
-  document.querySelector('#folder-title').textContent = selected || 'All notes';
+  document.querySelector('#folder-title').textContent = selected ? selected.replaceAll('/', ' / ') : 'All notes';
   document.querySelector('#result-count').textContent = `${count} ${count === 1 ? 'note' : 'notes'} ${query ? 'found' : 'in your library'}`;
   document.querySelector('#empty').hidden = count > 0;
   buttons.forEach(button => {

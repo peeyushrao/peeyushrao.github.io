@@ -131,19 +131,26 @@ def build(destination=None):
         plain = unescape(re.sub('<[^>]+>', ' ', body))
         plain = re.sub(r'\s+', ' ', plain).strip()
         excerpt = plain[:180] if kind != 'PDF' else 'PDF reference · Open to read or download.'
-        entries.append({'title':title, 'folder':rel.parts[0], 'type':kind,
+        entries.append({'title':title, 'folder':rel.parts[0], 'directory':rel.parent.as_posix(), 'type':kind,
                         'url':'posts/' + known[rel.as_posix()], 'excerpt':excerpt,
                         'text':plain, 'source':rel.as_posix()})
         article = f'''<main class="reading"><a class="back" href="../index.html">← All notes</a>
-<div class="eyebrow">{escape(rel.parts[0])} / {kind}</div><h1>{escape(title)}</h1>
+<div class="eyebrow">{escape(' / '.join(rel.parts[:-1]))} / {kind}</div><h1>{escape(title)}</h1>
 <a class="download" href="{original}" download>Download original ↗</a><article>{body}</article></main>'''
         (output / 'posts' / known[rel.as_posix()]).write_text(shell(title, article, '../'), encoding='utf-8')
     buttons = '<button class="folder active" data-folder="">All notes <span>' + str(len(entries)) + '</span></button>'
     for folder in folders:
-        count = sum(e['folder'] == folder for e in entries)
-        buttons += f'<button class="folder" data-folder="{escape(folder)}">{escape(folder)} <span>{count}</span></button>'
-    cards = ''.join(f'''<a class="card" href="{escape(e['url'])}" data-folder="{escape(e['folder'])}" data-search="{escape((e['title']+' '+e['text']+' '+e['folder']).lower())}">
-<div class="card-top"><span>{escape(e['folder'])}</span><b>{e['type']}</b></div><h3>{escape(e['title'])}</h3><p>{escape(e['excerpt'])}</p><span class="read">Read note ↗</span></a>''' for e in entries)
+        directories = [content / folder] + sorted((p for p in (content / folder).rglob('*')
+            if p.is_dir() and not any(part.startswith('.') for part in p.relative_to(content).parts)
+            and not any(parent.is_symlink() for parent in [p, *p.parents])), key=natural_key)
+        for directory in directories:
+            key = directory.relative_to(content).as_posix()
+            depth = len(directory.relative_to(content).parts) - 1
+            count = sum(e['directory'] == key or e['directory'].startswith(key + '/') for e in entries)
+            label = ('↳ ' if depth else '') + directory.name
+            buttons += f'<button class="folder{ " child-folder" if depth else ""}" data-folder="{escape(key)}" style="--depth:{depth}" title="{escape(key)}">{escape(label)} <span>{count}</span></button>'
+    cards = ''.join(f'''<a class="card" href="{escape(e['url'])}" data-folder="{escape(e['directory'])}" data-search="{escape((e['title']+' '+e['text']+' '+e['directory']).lower())}">
+<div class="card-top"><span title="{escape(e['directory'])}">{escape(e['directory'].replace('/', ' / '))}</span><b>{e['type']}</b></div><h3>{escape(e['title'])}</h3><p>{escape(e['excerpt'])}</p><span class="read">Read note ↗</span></a>''' for e in entries)
     routes = json.dumps({e['source']:e['url'] for e in entries}, ensure_ascii=True).replace('<', '\\u003c')
     home = f'''<main><section class="hero"><div class="hero-copy"><div class="eyebrow">LEARNING IN THE OPEN</div>
 <h1>Understand the systems.<br><em>Connect the signals.</em></h1><p>Practical notes on SOC, EDR, cloud security, and detection engineering.<br class="desktop"> A growing library for investigation and interview preparation.</p>
