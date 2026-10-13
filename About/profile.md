@@ -1,0 +1,12 @@
+# Technical Notes and Cybersecurity Core Concepts
+
+Select a topic from the sidebar.
+
+## About Me
+
+- 👤 GitHub: [peeyushrao](https://github.com/peeyushrao/)
+- 🛡️ Focus: SOC, EDR, Detection Engineering, Security Services Edge
+- Personal Scribblings - https://kabirrao.wordpress.com/
+- To Do - https://my-tasks-8s3.pages.dev/
+- <span style="color:green">BREATH</span> - https://peeyushrao.github.io/tools/breathe-478.html
+
