@@ -155,7 +155,7 @@ def build(destination=None):
     routes = json.dumps({e['source']:e['url'] for e in entries}, ensure_ascii=True).replace('<', '\\u003c')
     home = f'''<main><section class="hero"><div class="hero-copy"><div class="eyebrow">LEARNING IN THE OPEN</div>
 <h1>Understand the systems.<br><em>Connect the signals.</em></h1><p>Practical notes on SOC, EDR, cloud security, and detection engineering.<br class="desktop"> A growing library for investigation and interview preparation.</p>
-<div class="stats"><strong>{len(entries)}</strong> notes <i></i><strong>{len(folders)}</strong> folders <i></i><a href="About/breathe-478.html">Take a breathing break ↗</a></div></div>
+<div class="stats"><strong>{len(entries)}</strong> notes <i></i><strong>{len(folders)}</strong> folders <i></i><a href="files/About/breathe-478.html">Take a breathing break ↗</a></div></div>
 <div class="field-index"><div class="field-heading"><span>THE FIELD INDEX</span><b>VOL. 01</b></div>
 <div class="field-row"><span>01</span><div><strong>Detection &amp; response</strong><small>Signals, investigations, and the endpoint</small></div></div>
 <div class="field-row"><span>02</span><div><strong>Cloud &amp; infrastructure</strong><small>Workloads, identity, and what connects them</small></div></div>
