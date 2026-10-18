@@ -29,6 +29,6 @@ These notes are a living collection, rather than a finished textbook. I revise t
 - [GitHub — peeyushrao](https://github.com/peeyushrao/)
 - [Personal scribblings](https://kabirrao.wordpress.com/)
 - [My task list](https://my-tasks-8s3.pages.dev/)
-- [Take a breathing break](../tools/breathe-478.html)
+- [Take a breathing break](../About/breathe-478.html)
 
 > Understand the systems. Connect the signals. Keep learning.
