@@ -1,67 +1,70 @@
-# Peeyush Rao — Security notes
+# Peeyush Rao — Security notebook
 
-Add a Markdown, Word, or PDF file to a topic folder. Commit and push to `main`. One GitHub Actions workflow builds the folder list, renders the notes, and publishes the blog.
+This repository powers **https://peeyushrao.github.io/**. Add a note, commit, and push to `main`; GitHub builds and publishes the site automatically.
 
-## One-time installation into your existing clone
+## Start here on this laptop
 
-Extract `peeyushrao-blog.zip`. Open PowerShell in the extracted folder, then run the installer with the path to your existing clone:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -RepositoryPath "C:\path\to\peeyushrao.github.io"
-```
-
-The execution-policy override applies only to that command. The installer checks the repository's `origin`, copies the builder and supporting files, preserves the current README as `About/profile.md`, and removes the old `.github/workflows/update-sidebar.yml`. It does not copy the bundled snapshot over your existing topic folders. Existing `index.html` and `_sidebar.md` can remain; the new workflow publishes generated `dist/` instead.
-
-If you don't already have a clone, create one first:
+Your working copy is **`C:\Users\Shashi-Peeyush\Downloads\peeyushrao-blog`**. It is already a Git repository connected to `peeyushrao/peeyushrao.github.io`. There is no nested `repository` directory, and you do not need to extract a ZIP or run an installer again.
 
 ```powershell
-cd "$env:USERPROFILE\Documents"
-git clone https://github.com/peeyushrao/peeyushrao.github.io.git
-```
-
-After installing, in the clone:
-
-```powershell
-git status
-git diff
-git add .
-git commit -m "Simplify blog publishing and discover folders automatically"
-git push origin main
-```
-
-Set **GitHub → Settings → Pages → Source → GitHub Actions** once. Under **Actions → Publish security notes**, run the workflow on `main` if needed after changing that setting. Later pushes publish automatically. Your site is https://peeyushrao.github.io/.
-
-## Everyday use
-
-Keep your existing folders: `Arsenal`, `CrowdStrike`, `CWPP`, `IR`, `Interview-QA`, `Linux`, `Windows`, `Zscaler`, and `tools`.
-
-Create or rename any topic folder in the repository root; the site discovers it automatically. Nested subfolders work too. Add images alongside notes, or use the shared `images/` folder. Empty folders need a `.gitkeep` file for Git to retain them.
-
-```powershell
+cd "$env:USERPROFILE\Downloads\peeyushrao-blog"
 git pull --ff-only
-# Add or edit notes in a topic folder using File Explorer or your editor.
+# Add or edit your notes now.
+git status
 git add .
 git commit -m "Update security notes"
 git push origin main
 ```
 
-You do not edit a sidebar, change a folder list in Python, run Python locally, or manually trigger Actions for routine updates. Check the files listed by `git status` before committing.
+Review `git status` before staging, especially when deleting or moving notes. Push only the changes you intend to publish or store on GitHub.
 
-## Supported content
+## Where things belong
 
-- Markdown: tables, code blocks, images, relative document links, collapsible answers, and Mermaid diagrams.
-- Word `.docx`: readable articles with images/tables; exact Word pagination and advanced layout are not retained.
-- PDF: browser viewer plus an original download link. PDF text is not indexed.
-- Search: titles, folders, and full Markdown/Word text.
-- Downloads: copied alongside the originals. The existing archive remains in `Arsenal/Downloads`.
-- Breathing tool: retains its public URL at `/tools/breathe-478.html`.
-- Old Docsify `/#/Folder/note.md` bookmarks redirect to the generated article. Existing heading fragments are passed through; old fragments may differ from generated heading IDs.
+| Folder / file | Purpose |
+| --- | --- |
+| `CrowdStrike/`, `CWPP/`, `SecOps/`, `Interview/`, `Linux/`, `Windows/`, `Zscaler/`, `Arsenal/` | Published notes, grouped by topic |
+| `CrowdStrike/CQL/` and other child folders | Nested filters beneath their parent topic |
+| `About/profile.md` | The About page; also linked from the site header |
+| `rough/` | Draft staging: tracked in GitHub, excluded from the generated blog |
+| `images/` | Shared images referenced from notes |
+| `tools/` | Tool notes and the standalone breathing page |
+| `assets/` | Site styles, scripts, and the bundled Mermaid renderer |
+| `tests/` | Automated checks run before publishing; keep this folder |
+| `build.py` | Generates the static site |
+| `.github/workflows/pages.yml` | Builds and deploys on pushes to `main` |
+| `dist/` | Generated output; ignored by Git |
 
-The root README is setup documentation; the former home/profile content is available under About. Root directories `assets`, `tests`, `images`, `dist`, `work`, `outputs`, `node_modules`, and hidden directories are reserved. Use other names for topics. Symlinks and hidden content are excluded.
+## Draft first, publish when ready
 
-The workflow has no permission to commit source changes and creates no bot commits. It uploads the generated site as a Pages artifact. Uploaded material and downloads are public.
+Put unfinished notes and their attachments in the root `rough/` folder. Do not add it to `.gitignore`: it should remain in GitHub. The builder excludes all of `rough/` from navigation, search, article pages, legacy routes, and original-file downloads.
 
-## Local preview (optional)
+To publish a draft, move it and any needed attachments to a topic folder, fix relative links if needed, then commit and push. To unpublish a note, move it into `rough/` and push; the next successful build removes the previously generated page.
+
+**The repository is public.** Drafts in `rough/` remain visible on GitHub and in Git history; staging does not make them private.
+
+## Content and appearance
+
+- Markdown: headings, tables, code blocks, linked images, relative links, collapsible answers, and Mermaid diagrams.
+- Word `.docx`: converted into a readable article. Advanced Word formatting and pagination may differ.
+- PDF: browser viewer with an original download link. PDF text is not searched.
+- Search covers full published Markdown and Word text.
+- Topic folders and child folders are discovered automatically; no sidebar edits are needed. Root reserved folders and hidden content are excluded. Empty folders need a `.gitkeep` for Git to retain them.
+- The site uses a light ivory, teal, and sage palette with system fonts. Code blocks and diagrams have their own readable panels.
+- The breathing tool remains at `/tools/breathe-478.html`; old Docsify article bookmarks redirect where their original source paths still exist.
+
+## Publishing and troubleshooting
+
+Pages should use **Settings → Pages → Source → GitHub Actions**. The workflow is **Publish security notes**. You do not need **Run workflow** for everyday changes; each push to `main` triggers it.
+
+If an update is missing, check the latest commit and Actions run, then use **Ctrl + F5** after a successful deployment. If Git reports *dubious ownership* following the earlier folder cleanup, trust this exact local clone once in your own PowerShell:
+
+```powershell
+git config --global --add safe.directory "C:/Users/Shashi-Peeyush/Downloads/peeyushrao-blog"
+```
+
+## Optional local preview
+
+Python is not required to publish. For local preview only, use Python 3.13:
 
 ```powershell
 python -m venv .venv
@@ -71,7 +74,7 @@ python -m venv .venv
 .venv\Scripts\python -m http.server 8000 --directory dist
 ```
 
-Open http://localhost:8000. The workflow uses Python 3.13. The `dist/` folder is generated and excluded from Git. Mermaid 10.9.5 is bundled locally under its MIT license; the theme uses system fonts. Invalid diagrams retain their source as a fallback.
+Open http://localhost:8000. Generated files in `dist/` should not be committed. Mermaid 10.9.5 is bundled under its included MIT license. Invalid diagrams retain a source fallback.
 
 ## Git guide: managing both blogs
 
@@ -80,9 +83,9 @@ Keep a separate local clone for each blog. The repository folder you run Git fro
 | Blog | Folder on this laptop | Where notes belong |
 | --- | --- | --- |
 | `rpeeyush.github.io` | `Downloads\rpeeyush-blog\repository` | Inside `content\GAPS`, `content\Threat Hunting`, `content\Guidelines`, or another configured content folder |
-| `peeyushrao.github.io` | `Downloads\peeyushrao-blog\repository` | Inside topic folders such as `CrowdStrike\CQL`, `CWPP`, or `Windows` |
+| `peeyushrao.github.io` | `Downloads\peeyushrao-blog` | Inside topic folders such as `CrowdStrike\CQL`, `CWPP`, or `Windows` |
 
-Edit files inside the clone named `repository`, rather than the extracted ZIP's surrounding folder. Git publishes tracked changes in the clone. Check your destination at any time with:
+The security blog now lives directly in `Downloads\peeyushrao-blog`; there is no nested `repository` folder. The interview blog still uses `Downloads\rpeeyush-blog\repository`. Git publishes changes from the selected clone. Check your destination at any time with:
 
 ```powershell
 git remote -v
@@ -102,7 +105,7 @@ git config user.email "EMAIL_FOR_RPEEYUSH"
 For the security blog:
 
 ```powershell
-cd "$env:USERPROFILE\Downloads\peeyushrao-blog\repository"
+cd "$env:USERPROFILE\Downloads\peeyushrao-blog"
 git remote set-url origin https://peeyushrao@github.com/peeyushrao/peeyushrao.github.io.git
 git config user.name "Peeyush Rao"
 git config user.email "EMAIL_FOR_PEEYUSHRAO"
@@ -211,31 +214,3 @@ git log -1 --oneline
 | Site still shows the old version | Check the correct repository's Actions tab. If no new run exists, verify your push. If the run failed, read the failed step. If it succeeded, use Ctrl + F5. |
 
 Official references: [cloning repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), [multiple GitHub accounts with Git Credential Manager](https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/multiple-users.md), and [GitHub Pages publishing settings](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
-## Draft staging: rough
-
-Use the root `rough/` folder for unfinished notes and attachments. Git tracks
-this folder normally, but the builder excludes its entire contents from the
-published site: navigation, search, articles, original downloads, and legacy
-article routes. Do not add `rough/` to `.gitignore`.
-
-To publish a draft, move it (and any needed images/attachments) from `rough/`
-into a topic folder such as `CrowdStrike/CQL/`, then commit and push. Fix relative
-links if the move changes their paths. To unpublish a note, move it into `rough/`
-and push; the next successful build removes its former generated page and copy.
-
-The GitHub repository is public, so drafts in `rough/` are still visible on
-GitHub and in its history. This staging folder does not make documents private.
-
-Your working folder on this laptop is now the repository itself:
-
-```powershell
-cd "$env:USERPROFILE\Downloads\peeyushrao-blog"
-git status
-git add .
-git commit -m "Update drafts and notes"
-git push origin main
-```
-
-The old nested `repository` directory was removed during cleanup. Use this
-direct working path in place of earlier security-blog examples that include it.

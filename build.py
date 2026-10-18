@@ -67,12 +67,13 @@ class LocalLinks(HTMLParser):
     def handle_charref(self, name): self.parts.append('&#' + name + ';')
 
 def shell(title, body, prefix=''):
+    about = f'<a class="about-link" href="{prefix}posts/{page_id(Path("About/profile.md"))}.html">About</a>' if (ROOT / 'About/profile.md').exists() else ''
     return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{escape(title)} · Peeyush's notebook</title>
 <link rel="stylesheet" href="{prefix}assets/style.css"><link rel="stylesheet" href="{prefix}assets/diagrams.css"></head><body>
 <header><a class="brand" href="{prefix}index.html"><span class="mark">PR</span><span class="brand-copy">Peeyush Rao<span class="brand-caption">SECURITY NOTEBOOK</span></span></a>
-<a class="repo" href="https://github.com/peeyushrao/peeyushrao.github.io">GitHub ↗</a></header>
+<div class="header-links">{about}<a class="repo" href="https://github.com/peeyushrao/peeyushrao.github.io">GitHub ↗</a></div></header>
 {body}<footer>Peeyush Rao · Security notes <span>Learn. Practise. Revisit.</span></footer>
 <script src="{prefix}assets/mermaid.min.js"></script><script src="{prefix}assets/diagrams.js"></script>
 </body></html>'''
@@ -134,7 +135,7 @@ def build(destination=None):
         entries.append({'title':title, 'folder':rel.parts[0], 'directory':rel.parent.as_posix(), 'type':kind,
                         'url':'posts/' + known[rel.as_posix()], 'excerpt':excerpt,
                         'text':plain, 'source':rel.as_posix()})
-        article = f'''<main class="reading"><a class="back" href="../index.html">← All notes</a>
+        article = f'''<main class="reading{' about-page' if rel.as_posix() == 'About/profile.md' else ''}"><a class="back" href="../index.html">← All notes</a>
 <div class="eyebrow">{escape(' / '.join(rel.parts[:-1]))} / {kind}</div><h1>{escape(title)}</h1>
 <a class="download" href="{original}" download>Download original ↗</a><article>{body}</article></main>'''
         (output / 'posts' / known[rel.as_posix()]).write_text(shell(title, article, '../'), encoding='utf-8')
