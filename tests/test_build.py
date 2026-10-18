@@ -106,4 +106,25 @@ class BlogTests(unittest.TestCase):
         self.assertIn('GAPS/note.md', home)
 
 
+    def test_rough_stays_in_source_but_is_not_published(self):
+        note = self.root / 'GAPS' / 'draft.md'
+        note.write_text('# Staging-only draft\n\nUnpublished body', encoding='utf-8')
+        published = self.run_build()[0]
+        staging = self.root / 'rough' / 'Nested'
+        staging.mkdir(parents=True)
+        note.rename(staging / 'draft.md')
+        (staging / 'attachment.pdf').write_bytes(b'%PDF-1.4')
+        (staging / 'broken.docx').write_bytes(b'not converted because it is a draft')
+        entries = self.run_build()
+        self.assertEqual(entries, [])
+        self.assertNotIn('rough', build.discover_folders())
+        self.assertTrue((staging / 'draft.md').exists())
+        self.assertTrue((staging / 'attachment.pdf').exists())
+        self.assertFalse((self.root / 'dist' / published['url']).exists())
+        self.assertFalse((self.root / 'dist' / 'files' / 'rough').exists())
+        home = (self.root / 'dist' / 'index.html').read_text(encoding='utf-8')
+        self.assertNotIn('Staging-only draft', home)
+        self.assertNotIn('rough/Nested', home)
+
+
 if __name__ == '__main__': unittest.main()

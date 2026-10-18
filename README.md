@@ -211,3 +211,31 @@ git log -1 --oneline
 | Site still shows the old version | Check the correct repository's Actions tab. If no new run exists, verify your push. If the run failed, read the failed step. If it succeeded, use Ctrl + F5. |
 
 Official references: [cloning repositories](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository), [multiple GitHub accounts with Git Credential Manager](https://github.com/git-ecosystem/git-credential-manager/blob/main/docs/multiple-users.md), and [GitHub Pages publishing settings](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+## Draft staging: rough
+
+Use the root `rough/` folder for unfinished notes and attachments. Git tracks
+this folder normally, but the builder excludes its entire contents from the
+published site: navigation, search, articles, original downloads, and legacy
+article routes. Do not add `rough/` to `.gitignore`.
+
+To publish a draft, move it (and any needed images/attachments) from `rough/`
+into a topic folder such as `CrowdStrike/CQL/`, then commit and push. Fix relative
+links if the move changes their paths. To unpublish a note, move it into `rough/`
+and push; the next successful build removes its former generated page and copy.
+
+The GitHub repository is public, so drafts in `rough/` are still visible on
+GitHub and in its history. This staging folder does not make documents private.
+
+Your working folder on this laptop is now the repository itself:
+
+```powershell
+cd "$env:USERPROFILE\Downloads\peeyushrao-blog"
+git status
+git add .
+git commit -m "Update drafts and notes"
+git push origin main
+```
+
+The old nested `repository` directory was removed during cleanup. Use this
+direct working path in place of earlier security-blog examples that include it.

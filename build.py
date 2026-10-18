@@ -13,7 +13,7 @@ import mammoth
 import markdown
 
 ROOT = Path(__file__).resolve().parent
-RESERVED = {'assets', 'tests', 'images', 'dist', 'work', 'outputs', '__pycache__', 'node_modules'}
+RESERVED = {'assets', 'tests', 'images', 'dist', 'work', 'outputs', '__pycache__', 'node_modules', 'rough'}
 TYPES = {'.md', '.docx', '.pdf'}
 
 def natural_key(value):
