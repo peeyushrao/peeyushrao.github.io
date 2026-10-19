@@ -4,7 +4,7 @@ This repository powers **https://peeyushrao.github.io/**. Add a note, commit, an
 
 ## Start here on this laptop
 
-Your working copy is **`C:\Users\Shashi-Peeyush\Downloads\peeyushrao-blog`**. It is already a Git repository connected to `peeyushrao/peeyushrao.github.io`. There is no nested `repository` directory, and you do not need to extract a ZIP or run an installer again.
+Your working copy is **`C:\Users\Username\Downloads\peeyushrao-blog`**. It is already a Git repository connected to `peeyushrao/peeyushrao.github.io`. There is no nested `repository` directory, and you do not need to extract a ZIP or run an installer again.
 
 ```powershell
 cd "$env:USERPROFILE\Downloads\peeyushrao-blog"
@@ -59,7 +59,7 @@ Pages should use **Settings → Pages → Source → GitHub Actions**. The workf
 If an update is missing, check the latest commit and Actions run, then use **Ctrl + F5** after a successful deployment. If Git reports *dubious ownership* following the earlier folder cleanup, trust this exact local clone once in your own PowerShell:
 
 ```powershell
-git config --global --add safe.directory "C:/Users/Shashi-Peeyush/Downloads/peeyushrao-blog"
+git config --global --add safe.directory "C:/Users/Username/Downloads/peeyushrao-blog"
 ```
 
 ## Optional local preview
